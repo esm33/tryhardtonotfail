@@ -1,12 +1,19 @@
+
 <?php>
 
-//database connection 
-$host = 'localhost';
-$db = 'IT490';
-$username = 'create_a_user_for_the_db';
-$password = 'enter_password_here';
+ 
 
-$conn = new mysqli($host, $username, $password, $db);
+
+
+
+
+
+
+
+
+
+
+
 //pings this if can't connect to the db
 if ($conn -> errno != 0)
 {echo "failed to connect to database: ". $conn->error . PHP_EOL; 
