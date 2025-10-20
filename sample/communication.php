@@ -27,7 +27,7 @@ switch ($request["type"])
 			//else, set the response message to fail
 			$response = "login failed, yeah we can't do that";
 		}
-	
+	break;
 
 	case "registration":
 		//get the username value and the password value
