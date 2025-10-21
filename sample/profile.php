@@ -22,8 +22,9 @@
 	<div class="glass-card">
 	<h1>Profile Page</h1> 
 		<div id="logged-in-page">
-		<p>Welcome <?php ?>! </p>
-		<div class="logout-link"><a href="./logout.php"> Logout HERE. </a></div>
+		<p>Welcome <?php echo htmlspecialchars($_SESSION['username_profile']); ?> </p>
+		<p>You have successfully logged into your profile page</p>	
+	<div class="logout-link"><a href="./logout.php"> Logout HERE. </a></div>
 	</div>
 	</div>
 </div>

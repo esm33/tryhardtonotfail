@@ -27,12 +27,14 @@ switch ($request["type"])
 		{
 			//if the username value and password value math
 			//then set the response message to success
-			$response = "login, yeah we can do that";
+			$response = "success";
+			$_SESSION['successful_login'] = true;
+			$_SESSION['username_profile'] = $usr;
 		}
 		else 
 		{
 			//else, set the response message to fail
-			$response = "login failed, yeah we can't do that";
+			$response = "fail";
 		}
 
 		//update this to pull user info from the db

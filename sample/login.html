@@ -6,6 +6,11 @@ function HandleLoginResponse(response)
 	var text = JSON.parse(response);
 //	document.getElementById("textResponse").innerHTML = response+"<p>";	
 	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+	if(text == "success")
+	{
+		window.location.href = "profile.php";
+	}
+
 }
 
 function SendLoginRequest(username,password)
@@ -26,7 +31,7 @@ function SendLoginRequest(username,password)
 
 function getLoginInfo()
 {
-	alert("login button clicked!");
+//	alert("login button clicked!");
 	const username_text_input = document.getElementById("username");
 	const username_input_value = username_text_input.value;
 	
