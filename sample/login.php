@@ -1,19 +1,6 @@
 
 <?php>
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
 //pings this if can't connect to the db
 if ($conn -> errno != 0)
 {echo "failed to connect to database: ". $conn->error . PHP_EOL; 
@@ -58,4 +45,4 @@ switch ($request["type"])
 echo json_encode($response);
 exit(0);
 
-?
+?>
