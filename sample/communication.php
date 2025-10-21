@@ -1,11 +1,16 @@
 <?php
 
+session_start();
+
+/*
 //pings this if can't connect to the db
 if($conn -> errno != 0)
 {echo "failed to connect to database: ". $conn->error . PHP_EOL;
-ecit(0);
+exit(0);
 //display this if it can connect to the db
 echo "successfully connected to the database";
+
+ */
 
 if (!isset($_POST))
 {
@@ -28,6 +33,7 @@ switch ($request["type"])
 			//if the username value and password value math
 			//then set the response message to success
 			$response = "success";
+			echo json_encode($response);
 			$_SESSION['successful_login'] = true;
 			$_SESSION['username_profile'] = $usr;
 		}
