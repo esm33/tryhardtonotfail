@@ -1,21 +1,25 @@
 
-<?php>
+<?php
 
+session_start();
+/*
 //pings this if can't connect to the db
 if ($conn -> errno != 0)
 {echo "failed to connect to database: ". $conn->error . PHP_EOL; 
 exit (0);}
 //display this if it can connect to the db
 echo "successfully connected to the database";
-
+ */
 if (!isset($_POST))
 {
 	$msg = "NO POST MESSAGE SET, POLITELY FUCK OFF";
 	echo json_encode($msg);
 	exit(0);
-		
+}
+
 $request = $_POST;
 $response = "unsupported request type, politely FUCK OFF";
+
 switch ($request["type"])
 {
 	case "login":
@@ -38,9 +42,6 @@ switch ($request["type"])
 		}
 
 		//update this to pull user info from the db
-
-
-
 
 	break;
 }

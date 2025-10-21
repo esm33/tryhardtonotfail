@@ -12,7 +12,7 @@ echo "successfully connected to the database";
 
  */
 
-if (!isset($_POST))
+if (empty($_POST))
 {
 	$msg = "NO POST MESSAGE SET, POLITELY FUCK OFF";
 	echo json_encode($msg);
@@ -20,6 +20,7 @@ if (!isset($_POST))
 }
 $request = $_POST;
 $response = "unsupported request type, politely FUCK OFF";
+
 switch ($request["type"])
 {
 	case "login":
@@ -33,7 +34,6 @@ switch ($request["type"])
 			//if the username value and password value math
 			//then set the response message to success
 			$response = "success";
-			echo json_encode($response);
 			$_SESSION['successful_login'] = true;
 			$_SESSION['username_profile'] = $usr;
 		}
