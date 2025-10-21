@@ -84,7 +84,7 @@ function getLoginInfo()
 			</div>
 
 			<div id="textResponse">
-				awaiting
+				
 			</div>
 		</form>
 	</div>
