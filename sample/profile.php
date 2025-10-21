@@ -1,6 +1,4 @@
 <?php
-include 'login.php';
-include 'communication.php';
 
 	if(!isset($_SESSION))
 	{
