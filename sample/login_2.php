@@ -1,21 +1,36 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION['successful_login']))
+{
+	header("Location: profile.php");
+}
+?>
+
 <html>
 <script>
 
 function HandleLoginResponse(response)
 {
+	console.log("response:", response);
 	var text = JSON.parse(response);
 //	document.getElementById("textResponse").innerHTML = response+"<p>";	
 	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+	if(text === "success")
+	{
+		window.location.href = "profile.php";
+	}
+
 }
 
 function SendLoginRequest(username,password)
 {
 	var request = new XMLHttpRequest();
-	request.open("POST","login.php",true);
+	request.open("POST","communication.php",true);
 	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	request.onreadystatechange= function ()
 	{
-		
 		if ((this.readyState == 4)&&(this.status == 200))
 		{
 			HandleLoginResponse(this.responseText);
@@ -33,7 +48,6 @@ function getLoginInfo()
 	const password_text_input = document.getElementById("password");
 	const password_input_value = password_text_input.value;
 
-	//keep track, just in case	NTS: when in doubt, console.log
 	console.log("Username: ", username_input_value);
 	console.log("Password: ", password_input_value);
 
@@ -45,19 +59,41 @@ function getLoginInfo()
 <head>
 	<link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 <div class="container">
 	<div class="glass-card">
-	<h1>Main Page</h1> 
-		<div id="links_to_main_pages">
-		<div class="login-link"><a href="./login_2.php">Login HERE.</a></div>
-		<div class="register-link"><a href="./registration.html">Register HERE.</a></div>
-	</div>
-		<div id="textResponse">
-			<!--awaiting response-->
-		</div>
+
+	<h1>Login Form</h1>
+		<form id="loginForm">		
+			<div class="input-group">
+				<label for="username">Username: </label>
+				<input type="text" id="username" name="username" placeholder="Enter your username" required />
+			</div>
+						
+			<div class="input-group">
+				<label for="password">Password: </label>
+				<input type="password" id="password" name="password" placeholder="Enter your password" required />
+			</div>
+
+			<br>
+			<button type="button" onclick="getLoginInfo()" class="btn">Login</button>
+			
+			<div class="register-link">
+				Don't have an account? <a href="./registration.html">Sign up</a>
+			</div>
+
+			<div id="textResponse">
+				awaiting
+			</div>
+		</form>
 	</div>
 </div>
+<!--
+<div id="textResponse">
+awaiting response
+</div>
+-->
 <script>
 //SendLoginRequest("kehoed","12345");
 </script>
