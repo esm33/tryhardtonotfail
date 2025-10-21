@@ -7,7 +7,7 @@
 
 	if(!isset($_SESSION['successful_login']))
 	{
-		header("Location: login.html");
+		header("Location: login.php");
 		exit(0);
 	}
 
