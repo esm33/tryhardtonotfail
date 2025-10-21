@@ -11,6 +11,15 @@ exit(0);
 echo "successfully connected to the database";
 
  */
+{
+$this->registerdb = new mysqli("127.0.0.1","root","12345","IT490");
+if ($this->registerdb->connect_errno != 0)
+{
+        echo "Error conneceting to database: ".$this->registerdb->connect_error.PHP_EOL;
+        exit(1);
+}
+ echo "correctly connected to database".PHP_EOL;
+}
 
 if (empty($_POST))
 {
@@ -45,8 +54,32 @@ switch ($request["type"])
 	break;
 
 	case "registration":
-		{
-	
+
+
+
+
+
+
+
+
+		$un = $request["uname"];
+		$pw = $request["pword"];
+
+{
+        $un = $this->registerdb->real_escape_string($username);
+        $pw = $this->registerdb->real_escape_string($password);
+        $statement = "Insert into users  (username, password) values ( $un, $pw)"
+        $reponse = $this->registerdb->query($statement);
+        if ( $response->execute();){
+        echo "your registration is sucessful!"
+        }
+        else {
+        echo "something went wrong please try again!"}
+}
+}
+
+
+
 		}
 	break;
 

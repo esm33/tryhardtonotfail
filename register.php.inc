@@ -16,7 +16,7 @@ if ($this->registerdb->connect_errno != 0)
 public function registerUser($username, $password){
 	$un = $this->registerdb->real_escape_string($username);
 	$pw = $this->registerdb->real_escape_string($password);
-	$statement = "Intert into users (name, username, password) values ($un, $un, $pw)";
+	$statement = "Insert into users  (username, password) values ( $un, $pw)";
 	$reponse = $this->registerdb->query($statement);
 	if ( $response->execute();){
 	echo "your registration is sucessful!"
