@@ -19,10 +19,11 @@ function SendRegistrationRequest(username,password)
 		if ((this.readyState == 4)&&(this.status == 200))
 		{
 			HandleRegistrationResponse(this.responseText);
+			console.log("Sendregistrationrequest function ready state done.");
 		}		
 	}
 	request.send("type=registration&uname="+username+"&pword="+password);
-
+	console.log("type registration sent");
 }
 
 
