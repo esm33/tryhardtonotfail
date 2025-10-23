@@ -24,6 +24,7 @@ $exchange->declareExchange();
 $queue = new AMQPQueue($channel);
 $queue->setName('testQueue');
 $queue->setFlags(AMQP_DURABLE);
+$queue->setFlags(AMQP_DURABLE);
 $queue->declareQueue();
 $queue->bind('testExchange', 'db_route');
 

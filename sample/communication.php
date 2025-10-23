@@ -61,6 +61,7 @@ try {
     $exchange = new AMQPExchange($channel);
     $exchange->setName($RABBITMQ['exchange']);
     $exchange->setType('direct');
+    $exchange->setFlags(AMQP_DURABLE);
     $exchange->declareExchange();
 
     // Create or declare a response queue (unique per client)
