@@ -117,28 +117,30 @@ try {
     echo json_encode(["status" => "error", "message" => $e->getMessage()]);
     exit;
 }
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 $request = $_POST;
 $response = "unsupported request type, politely FUCK OFF";
 
-switch ($request["type"])
+		case "registration":
+			$type = "registration";
+
+		$un = $request["uname"];
+		$pw = $request["pword"];
+
 {
+        $un = $this->registerdb->real_escape_string($username);
+        $pw = $this->registerdb->real_escape_string($password);
+        $statement = "Insert into users  (username, password) values ( $un, $pw)"
+        $reponse = $this->registerdb->query($statement);
+        if ( $response->execute();){
+        echo "your registration is sucessful!"
+        }
+        else {
+        echo "something went wrong please try again!"}
+
+
 	case "login":
+		$type = "login";
 		//get the username value and the password value
 		$usr = $request["uname"];
 		$pwd = $request["pword"];
@@ -158,39 +160,6 @@ switch ($request["type"])
 			$response = "fail";
 		}
 	break;
-
-	case "registration":
-
-
-
-
-
-
-
-
-		$un = $request["uname"];
-		$pw = $request["pword"];
-
-{
-        $un = $this->registerdb->real_escape_string($username);
-        $pw = $this->registerdb->real_escape_string($password);
-        $statement = "Insert into users  (username, password) values ( $un, $pw)"
-        $reponse = $this->registerdb->query($statement);
-        if ( $response->execute();){
-        echo "your registration is sucessful!"
-        }
-        else {
-        echo "something went wrong please try again!"}
 }
-}
-
-
-
-		}
-	break;
-
-}
-echo json_encode($response);
-exit(0);
-
 ?>
+
