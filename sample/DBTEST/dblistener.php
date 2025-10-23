@@ -1,4 +1,6 @@
 <?php
+require_once('login.php.inc');
+
 // DB Listener for RabbitMQ
 $connection = new AMQPConnection([
     'host' => '100.86.240.90',
@@ -35,37 +37,15 @@ while (true) {
         echo " [>] Received raw message: $body\n";
 
         $data = json_decode($body, true);
-        if ($data === null) {
-            echo " [!] JSON decode failed or null message\n";
-        } else {
-            echo " [✓] Decoded message:\n";
-            print_r($data);
-        }
-
-        $queue->ack($message->getDeliveryTag());
-    });
-    $request = $_POST;
-$response = "unsupported request type, politely FUCK OFF";
-    switch {
-
-		case "registration":
-			$type = "registration";
-
-		$un = $request["uname"];
-		$pw = $request["pword"];
-
-{
-        $un = $this->registerdb->real_escape_string($username);
-        $pw = $this->registerdb->real_escape_string($password);
-        $statement = "Insert into users  (username, password) values ( $un, $pw)"
-        $reponse = $this->registerdb->query($statement);
-        if ( $response->execute();){
-        echo "your registration is sucessful!"
-        }
-        else {
-        echo "something went wrong please try again!"}
-        break;
-
+       $request = $_POST;
+    if(isset($payload['type'])){  
+    $loginDB = new loginDB();
+    $connDB = $loginDB->getConnection();
+    switch ($payload['type']){
+    
+    
+    
+    
 
 	case "login":
 		$type = "login";
@@ -81,14 +61,13 @@ $statement2 ->bindValue(':emailAddress', $emailAddress);
 $statement2->execute();
 	$managers = $statement2->fetch();
 
-        if ( $statement2->execute();){
-        echo "fetching your data is sucessful!"
-        }
+        if ( $statement2->execute()) {
+        echo "fetching your data is sucessful!" ; }
         else {
-        echo "something went wrong please try again!"}
+        echo "something went wrong please try again!";}
 
 		//if statements to check for specific credentials 
-		if($usr == $managers['username'];&& $pwd == $managers['password'];)
+		if($usr == $managers['username'] && $pwd == $managers['password'])
 		{
 			//if the username value and password value math
 			//then set the response message to success
@@ -101,7 +80,18 @@ $statement2->execute();
 			//else, set the response message to fail
 			$response = "fail";
 		}
-	break;
-}}
+	break;    
+    
+  
+    }
+    
+    }
+    
+
+        $queue->ack($message->getDeliveryTag());
+    });
+    
+   } 
+
 ?>
 
