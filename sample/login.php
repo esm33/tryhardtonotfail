@@ -52,6 +52,7 @@ function getLoginInfo()
 	console.log("Password: ", password_input_value);
 
 	SendLoginRequest(username_input_value, password_input_value);
+	console.log("send to communications");
 }
 
 
