@@ -8,12 +8,8 @@ function HandleRegistrationResponse(response)
 	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
 }
 
-function SendRegistrationRequest()
+function SendRegistrationRequest(username,password)
 {
-	const usern = document.getElementById("uname");
-	const passd = document.getElementById("pword");
-	//const usern_value = usern.value;
-	//const passd_value = passd.value;
 	var request = new XMLHttpRequest();
 	request.open("POST","communication.php",true);
 	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -23,11 +19,29 @@ function SendRegistrationRequest()
 		if ((this.readyState == 4)&&(this.status == 200))
 		{
 			HandleRegistrationResponse(this.responseText);
+			console.log("Sendregistrationrequest function ready state done.");
 		}		
 	}
 	request.send("type=registration&uname="+username+"&pword="+password);
+	console.log("type registration sent");
 }
 
+
+function getRegInfo()
+{
+	
+	const username_text_input = document.getElementById("username");
+	const username_input_value = username_text_input.value;
+	
+	const password_text_input = document.getElementById("password");
+	const password_input_value = password_text_input.value;
+
+	//keep track, just in case	NTS: when in doubt, console.log
+	console.log("Username: ", username_input_value);
+	console.log("Password: ", password_input_value);
+
+	SendRegistrationRequest(username_input_value, password_input_value);
+}
 
 </script>
 
@@ -54,7 +68,7 @@ function SendRegistrationRequest()
 	<label for="retype_pw">Retype Password:</label>
 	<input type="password" id="retype_pw" name="retype_pword">
 	-->
-			<button type="button" onclick="SendRegistrationRequest()" class="btn">Register</button>
+			<button type="button" onclick="getRegInfo()" class="btn">Register</button>
 	
 			<div class="login-link">
 				Already have an account? <a href="login.php">Login</a>
@@ -63,7 +77,7 @@ function SendRegistrationRequest()
 	</div>
 </div>
 <div id="textResponse">
-	<?--awaiting response-->
+	<!--awaiting response-->
 </div>
 <script>
 //SendLoginRequest("kehoed","12345");
