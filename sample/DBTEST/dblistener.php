@@ -12,8 +12,6 @@ if (!$connection->connect()) {
 }
 
 $channel = new AMQPChannel($connection);
-$message = "";
-$toastClass = "";
 
 // Declare exchange
 $exchange = new AMQPExchange($channel);
@@ -25,6 +23,7 @@ $exchange->declareExchange();
 // Declare and bind queue
 $queue = new AMQPQueue($channel);
 $queue->setName('testQueue');
+$queue->setFlags(AMQP_DURABLE);
 $queue->setFlags(AMQP_DURABLE);
 $queue->declareQueue();
 $queue->bind('testExchange', 'db_route');
@@ -59,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      $checkEmailStmt->close();
      $connection->close();
 }
+
 echo " [x] Waiting for messages on 'testQueue'...\n";
 
 while (true) {
