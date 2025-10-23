@@ -1,4 +1,6 @@
 <?php
+require_once('login.php.inc');
+
 // DB Listener for RabbitMQ
 $connection = new AMQPConnection([
     'host' => '100.86.240.90',
@@ -67,15 +69,61 @@ while (true) {
         echo " [>] Received raw message: $body\n";
 
         $data = json_decode($body, true);
-        if ($data === null) {
-            echo " [!] JSON decode failed or null message\n";
-        } else {
-            echo " [✓] Decoded message:\n";
-            print_r($data);
-        }
+       $request = $_POST;
+    if(isset($payload['type'])){  
+    $loginDB = new loginDB();
+    $connDB = $loginDB->getConnection();
+    switch ($payload['type']){
+    
+    
+    
+    
+
+	case "login":
+		$type = "login";
+		//get the username value and the password value
+		$usr = $request["uname"];
+		$pwd = $request["pword"];
+
+
+	$queryAllCategories = 'SELECT username,password FROM users
+                        WHERE username = :usr';
+$statement2 = $db->prepare($queryAllCategories);
+$statement2 ->bindValue(':emailAddress', $emailAddress);
+$statement2->execute();
+	$managers = $statement2->fetch();
+
+        if ( $statement2->execute()) {
+        echo "fetching your data is sucessful!" ; }
+        else {
+        echo "something went wrong please try again!";}
+
+		//if statements to check for specific credentials 
+		if($usr == $managers['username'] && $pwd == $managers['password'])
+		{
+			//if the username value and password value math
+			//then set the response message to success
+			$response = "success";
+			$_SESSION['successful_login'] = true;
+			$_SESSION['username_profile'] = $usr;
+		}
+		else 
+		{
+			//else, set the response message to fail
+			$response = "fail";
+		}
+	break;    
+    
+  
+    }
+    
+    }
+    
 
         $queue->ack($message->getDeliveryTag());
     });
-}
+    
+   } 
+
 ?>
 
