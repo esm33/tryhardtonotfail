@@ -6,8 +6,8 @@ function HandleRegistrationResponse(response)
 	var text = JSON.parse(response);
 //	document.getElementById("textResponse").innerHTML = response+"<p>";	
 	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
-	
-	  if(text.status === "success")
+	console.log("response:", text);
+	  if(text.status === "success" || text === 1)
 	  {
 	    window.location.href = "login.php";
 	  }
@@ -28,7 +28,7 @@ function SendRegistrationRequest(username,password)
 		}		
 	}
 	request.send("type=registration&uname="+username+"&pword="+password);
-	console.log("type registration sent");
+	console.log("type registration sent HERE");
 }
 
 
@@ -46,6 +46,7 @@ function getRegInfo()
 	console.log("Password: ", password_input_value);
 
 	SendRegistrationRequest(username_input_value, password_input_value);
+	console.log("sendregistrationrequest done");
 }
 
 </script>
