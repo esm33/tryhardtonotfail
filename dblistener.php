@@ -39,60 +39,49 @@ while (true) {
 
         $data = json_decode($body, true);
        $request = $_POST;
-    if(isset($payload['type'])){  
+    if(isset($data["type"])){  
+    echo "type received";
+   
     $loginDB = new loginDB();
     $connDB = $loginDB->getConnection();
-    switch ($payload['type']){
-    
-    
-    
-    
-
-	case "login":
+    switch ($data['type']){
+  	case "login":
 		$type = "login";
 		//get the username value and the password value
-		$usr = $request["uname"];
-		$pwd = $request["pword"];
+		echo ("this is case login.");
+		$success = $loginDB->validateLogin($payload['username'], $payload['password']);
+		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
+		else {["status"=>"fail","message"=>"login failed"];}
+	break;    
+	case "registration":
+			$type = "registration";
+			console.log ("this is case registration.");
+
+		$un = $request["uname"];
+		$pw = $request["pword"];	
+		
 
 
-	$queryAllCategories = 'SELECT username,password FROM users
-                        WHERE username = :usr';
-$statement2 = $db->prepare($queryAllCategories);
-$statement2 ->bindValue(':emailAddress', $emailAddress);
-$statement2->execute();
-	$managers = $statement2->fetch();
-
-        if ( $statement2->execute()) {
-        echo "fetching your data is sucessful!" ; }
+        $un = $this->registerdb->real_escape_string($username);
+        $pw = $this->registerdb->real_escape_string($password);
+        $statement = $connDB->prepare("Insert into users  (username, password) values ( $un, $pw)");
+        $reponse = $this->registerdb->query($statement);
+        if ( $response->execute()){
+        echo "your registration is sucessful!";}
         else {
         echo "something went wrong please try again!";}
-
-		//if statements to check for specific credentials 
-		if($usr == $managers['username'] && $pwd == $managers['password'])
-		{
-			//if the username value and password value math
-			//then set the response message to success
-			$response = "success";
-			$_SESSION['successful_login'] = true;
-			$_SESSION['username_profile'] = $usr;
-		}
-		else 
-		{
-			//else, set the response message to fail
-			$response = "fail";
-		}
-	break;    
-    
-  
-    }
+        break;
+      
     
     }
-    
+    }
+    	$queue->ack($message->getDeliveryTag());
+});
 
-        $queue->ack($message->getDeliveryTag());
-    });
+}
+ 
     
-   } 
+   
 
 ?>
 
