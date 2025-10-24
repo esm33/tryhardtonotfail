@@ -49,27 +49,17 @@ while (true) {
 		$type = "login";
 		//get the username value and the password value
 		echo ("this is case login.");
-		$success = $loginDB->validateLogin($payload['username'], $payload['password']);
+		$success = $loginDB->validateLogin($data['username'], $data['password']);
 		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
 		else {["status"=>"fail","message"=>"login failed"];}
 	break;    
 	case "registration":
 			$type = "registration";
-			console.log ("this is case registration.");
-
-		$un = $request["uname"];
-		$pw = $request["pword"];	
+			echo ("this is case registration.");
+$success = $loginDB->registerUser($data['username'], $data['password']);
+		if ($success) { ["status"=>"success","message"=>"registration successful"]; }
+		else {["status"=>"fail","message"=>"registration failed"];}
 		
-
-
-        $un = $this->registerdb->real_escape_string($username);
-        $pw = $this->registerdb->real_escape_string($password);
-        $statement = $connDB->prepare("Insert into users  (username, password) values ( $un, $pw)");
-        $reponse = $this->registerdb->query($statement);
-        if ( $response->execute()){
-        echo "your registration is sucessful!";}
-        else {
-        echo "something went wrong please try again!";}
         break;
       
     
