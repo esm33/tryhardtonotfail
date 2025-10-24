@@ -6,6 +6,11 @@ function HandleRegistrationResponse(response)
 	var text = JSON.parse(response);
 //	document.getElementById("textResponse").innerHTML = response+"<p>";	
 	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+	
+	  if(text.status === "success")
+	  {
+	    window.location.href = "login.php";
+	  }
 }
 
 function SendRegistrationRequest(username,password)

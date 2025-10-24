@@ -110,7 +110,7 @@ try {
     }
 
 //if DB returns a successful login
-    if($response["status"]  === "success")
+    if($response == 1)
     {
     	$_SESSION['successful_login'] = true;
     	$_SESSION['username_profile'] = $uname;

@@ -17,7 +17,7 @@ function HandleLoginResponse(response)
 	var text = JSON.parse(response);
 //	document.getElementById("textResponse").innerHTML = response+"<p>";	
 	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
-	if(text.status === "success")
+	if(text === 1)
 	{
 		window.location.href = "profile.php";
 	}
