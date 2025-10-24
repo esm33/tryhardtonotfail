@@ -18,7 +18,7 @@ public function __construct()
 
 public function getConnection()
 {
-	return $this->loginDB ?? $this->db;
+	return $this->logindb;
 }
 
 public function validateLogin($username,$password)
@@ -41,22 +41,29 @@ public function validateLogin($username,$password)
 	return 0;//no users matched username
 }
 public function registerUser($username, $password){
+	//echo $un;
+	//echo $pw;
+	//echo $logindb;
+	$conn = $this->GetConnection();
+	$query = 'Insert into users (username, password) values (?, ?)';
+	$statement = $conn->prepare($query);
+	$statement->bind_param("ss", $username, $password);
+	
 	$un = $this->logindb->real_escape_string($username);
 	$pw = $this->logindb->real_escape_string($password);
-	echo $un;
-	echo $pw;
-	$query = $logindb->prepare("Insert into users  (username, password) values ( '$un', '$pw')");
-	$statement = $this->logindb->prepare($query);
+	//$statement = $this->logindb->prepare($query);
 	//$response = logindb->query($statement);
-	if($response->execute())
+	
+	if($statement->execute())
 	{
 		echo "Your registration was successful!";
+		return 1;
 	}
 	else {
 		"Something went wrong...Please try again!";
+		return 0;
 		}
-	$statement->closeCursor();
-	echo "Your insert statement status is $response";
+	$statement->close();
 	echo "your registration is sucessful!";
 	}
 }
