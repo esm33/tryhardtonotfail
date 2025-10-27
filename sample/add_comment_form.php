@@ -20,7 +20,7 @@
 		<link rel="stylesheet" href="./style.css">
 	</head>
 	<?php include 'navigationbar.php';>
-	
+	<body>
 	<main>
 	<div class="container">
 		<div class="glass-card">
@@ -38,17 +38,16 @@
 	
 	<section>
 		<?php if count($comments) == 0: ?>
-			<h1>There are no comments yet.</h1>
+			<div class="glass-card">
+			<h2>There are no comments yet.</h2>
+			</div>
 		<?php else: ?>
 		<div class="glass-card">
-			<div>
-			<?php foreach ($comments as $comment) : ?>
+			<?php foreach ($comments as $comment): ?>
 				<p><?php echo $comment->getComment(); ?></p>
 			<?php endforeach; ?>
-			</div>
 		</div>
 		<?php endif; ?>
 	</section>
-	
-	
+	</body>
 </html>
