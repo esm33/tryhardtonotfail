@@ -42,11 +42,11 @@
 			<h2>There are no comments yet.</h2>
 			</div>
 		<?php else: ?>
-		<div class="glass-card">
-			<?php foreach ($comments as $comment): ?>
-				<p><?php echo $comment->getComment(); ?></p>
-			<?php endforeach; ?>
-		</div>
+			<div class="glass-card">
+				<?php foreach ($comments as $comment): ?>
+					<p><?php echo $comment->getComment(); ?></p>
+				<?php endforeach; ?>
+			</div>
 		<?php endif; ?>
 	</section>
 	</body>
