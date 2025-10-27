@@ -2,10 +2,17 @@
 
 session_start();
 
+$failed_login = "failed to login";
 if(isset($_SESSION['successful_login']))
 {
 	header("Location: profile.php");
 }
+/*
+else 
+{
+	echo "<script>console.log('Login request:', " . json_encode($failed_login) . ");</script>";
+}
+*/
 ?>
 
 <html>

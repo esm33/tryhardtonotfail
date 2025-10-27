@@ -17,6 +17,7 @@
 	<title>User Profile</title>
 	<link rel="stylesheet" href="./style.css">
 </head>
+<?php include 'navigationbar.php'>
 <body>
 <div class="container">
 	<div class="glass-card">
