@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<?php endif; ?>
-	</section
+	</section>
 	
 <body>
 
