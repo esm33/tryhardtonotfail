@@ -21,7 +21,7 @@
 	</head>
 	<?php include 'navigationbar.php'; ?>
 	
-	<main>
+	<div>
 	<div class="container">
 		<div class="glass-card">
 			<h1> Add Recipe</h1>
@@ -40,7 +40,7 @@
 			</form>
 			<p><a href="homecatalog.php">View Drink Catalog</a></p>
 		</div>
-	</main>
+	</div>
 	
 <body>
 
