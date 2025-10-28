@@ -18,7 +18,7 @@
 		<title>Recipe Catalog</title>
 		<link rel="stylesheet" href="./style.css">
 	</head>
-	<?php include 'navigationbar.php'>
+	<?php include 'navigationbar.php'; ?>
 	
 	<div class="container">
 		<div class="glass-card">
