@@ -77,12 +77,9 @@
 		}
 
 		</script>
-	</body>
-	
 	
 	<?php include 'navigationbar.php'; ?>
 	
-	<body>
 	<div class="container">
 		<div class="glass-card">
 			<h1> Add Recipe</h1>
