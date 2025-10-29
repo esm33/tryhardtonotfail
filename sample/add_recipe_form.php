@@ -3,13 +3,17 @@
 	{
 		session_start();
 	}
-	
+	/*
 	if(!isset($_SESSION['successful_login']))
 		{
 			header("Location: login.php");
 			exit(0);
-		}	
+		}	*/
+		
+		
 //insert code here to connect to the database & grab the API 
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -103,7 +107,7 @@
 					<input type="text" name="drink_instructions" name="d_instructions" placeholder="How do you prepare your drink?" required/><br>
 				</div>
 
-				<button type="button" onclick="getRecipeInfo()" class="btn">Register</button>
+				<button type="button" onclick="getRecipeInfo()" class="btn">Submit New Recipe</button>
 				
 			</form>
 			

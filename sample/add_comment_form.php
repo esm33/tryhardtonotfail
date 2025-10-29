@@ -42,7 +42,7 @@
 			<p><a href="homecatalog.php">View Drink Catalog</a></p>
 		</div>
 	</main>
-	
+	<!--
 	<section>
 		<?php if (count($comments)) === 0: ?>
 			<div class="glass-card">
@@ -58,5 +58,6 @@
 			</div>
 		<?php endif; ?>
 	</section>
+	-->
 </body>
 </html>
