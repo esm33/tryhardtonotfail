@@ -4,7 +4,7 @@
 		session_start();
 	}
 	
-
+//don't forget to readd isset($_SESSION["successful_login"])
 		
 //insert code here to connect to the database & grab the API 
 
