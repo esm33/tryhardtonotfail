@@ -32,7 +32,7 @@
 			console.log("response:", text);
 		}
 
-		function SendAddRecipeFormRequest(recipe_name,drink_type,drink_ingredient, drink_instructions)
+		function SendAddRecipeFormRequest(recipe_name,drink_type,drink_ingredients, drink_instructions)
 		{
 			var request = new XMLHttpRequest();
 			request.open("POST","recipe_handling_communication.php",true);
@@ -47,7 +47,7 @@
 				}		
 			}
 			//FOCUS HERE
-			request.send("type=new_recipe&rname="+recipe_name+"&dtype="+drink_type+"&d_ingredient="+drink_ingredient+"&d_instructions="+drink_instructions);
+			request.send("type=new_recipe&rname="+recipe_name+"&dtype="+drink_type+"&d_ingredient="+drink_ingredients+"&d_instructions="+drink_instructions);
 			console.log("type new_recipe sent HERE");
 		}
 
