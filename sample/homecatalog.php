@@ -3,12 +3,13 @@
 	{
 		session_start();
 	}
-	
+	/*
 	if(!isset($_SESSION['successful_login']))
 		{
 			header("Location: login.php");
 			exit(0);
 		}
+	*/
 		
 //insert code here to connect to the database & grab the API 
 ?>

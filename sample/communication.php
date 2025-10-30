@@ -28,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST)) {
 $type  = $_POST['type']  ?? null;
 $uname = $_POST['uname'] ?? null;
 $pword = $_POST['pword'] ?? null;
+$rname = $_POST['rname'] ?? null;
+$dtype = $_POST['dtype'] ?? null;
+$d_ingredient = $_POST['d_ingredient'] ?? null;
+$d_instructions = $_POST['d_instructions'] ?? null;
 
 if (!$type || !$uname || !$pword) {
     echo json_encode(["status" => "error", "message" => "Missing required fields"]);

@@ -35,7 +35,7 @@
 		function SendAddRecipeFormRequest(recipe_name,drink_type,drink_ingredient, drink_instructions)
 		{
 			var request = new XMLHttpRequest();
-			request.open("POST","communication.php",true);
+			request.open("POST","recipe_handling_communication.php",true);
 			request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 			request.onreadystatechange= function ()
 			{
@@ -46,6 +46,7 @@
 					console.log("SendAddRecipeFormrequest function ready state done.");
 				}		
 			}
+			//FOCUS HERE
 			request.send("type=new_recipe&rname="+recipe_name+"&dtype="+drink_type+"&d_ingredient="+drink_ingredient+"&d_instructions="+drink_instructions);
 			console.log("type new_recipe sent HERE");
 		}
