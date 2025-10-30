@@ -68,4 +68,52 @@ public function registerUser($username, $password){
 	}
 }
 
+public function writeRecipe ($cdrink_name, $cdrink_ingredients, $cdrink_instructions){
+
+	$customconn = $this->GetConnection();
+	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions) values (?, ?, ?)';
+	$statement = $customconn->prepare($query);
+	$statement->bind_param("sss", $cdrink_name, $cdrink_ingredients, $cdrink_instructions);
+	
+	$cdn = $this->logindb->real_escape_string($cdrink_name);
+	$cdi = $this->logindb->real_escape_string($cdrink_ingredients);
+	$cdin = $this->logindb->real_escape_string($cdrink_instructions);
+	
+	if($statement->execute())
+	{
+		echo "You've added a custom drink!";
+		return 1;
+	}
+	else {
+		"Something went wrong...Please try again!";
+		return 0;
+		}
+	$statement->close();
+	echo "The custom drink was logged.";
+	}
+}
+
+public function addRatings ($id, $ratingvalue) {
+
+	$ratingconn = $this->GetConnection();
+	$query = 'Insert into ratings (id, ratingvalue) values (?, ?)';
+	$statement = $ratingconn->prepare($query);
+	$statement->bind_param("is", $id, $ratingvalue);
+	
+	$rv = $this->logindb->real_escape_string($ratingvalue);
+	
+	if($statement->execute())
+	{
+		echo "Thanks for your review!";
+		return 1;
+	}
+	else {
+		"Something went wrong...Please try again!";
+		return 0;
+		}
+	$statement->close();
+	echo "The rating was logged.";
+	}
+}
+
 ?>
