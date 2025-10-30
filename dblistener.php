@@ -69,7 +69,14 @@ $success = $loginDB->addRatings($data['username'], $data['rvalue']);
 		else {["status"=>"fail","message"=>"rating interger failed"];}
 		
         break;
-      
+       case "new":
+			$type = "new_rating";
+			echo ("this is case new rating.");
+$success = $loginDB->addRatings($data['username'], $data['rvalue']);
+		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
+		else {["status"=>"fail","message"=>"rating interger failed"];}
+		
+        break;
     
     }
     }
