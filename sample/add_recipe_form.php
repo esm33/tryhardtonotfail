@@ -92,7 +92,7 @@
 				
 				<div class="input-group">
 					<label for="drink_type">Drink Type</label>
-					<input type="text" id="drink_type" name="dtype" placeholder="" required/><br>
+					<input type="text" id="drink_type" name="dtype" placeholder="" value="Alcoholic or Non-Alcoholic" required/><br>
 				</div>
 				
 				<div class="input-group">
