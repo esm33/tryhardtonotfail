@@ -20,7 +20,7 @@
 		
 <!-- ================================================================================================================ -->	
 	<script type="text/javascript">
-		window.onload = function() {
+
 		function HandleAddRecipeFormResponse(response)
 		{
 			var text = JSON.parse(response);
@@ -48,11 +48,7 @@
 			console.log("type new_recipe sent HERE");
 		}
 
-
-		
-		} //window on load stuff
-		
-		function getRecipeInfo()
+function getRecipeInfo()
 		{
 			
 			const recipe_name_text_input = document.getElementById("recipe_name");
@@ -60,6 +56,9 @@
 
 			const drink_type_text_input = document.getElementById("drink_type");
 			const drink_type_input_value = drink_type_text_input.value;
+
+
+			const drink_ingredient_input_value = "";
 
 			const drink_ingredient_text_input = document.getElementById("drink_ingredient");
 			if(drink_ingredient_text_input !== undefined && drink_ingredient_text_input !== null)
@@ -80,6 +79,12 @@
 			SendAddRecipeFormRequest(recipe_name_input_value, drink_type_input_value, drink_ingredient_input_value, drink_instructions_input_value);
 			console.log("sendAddRecipeFormrequest done");
 		}
+		
+		window.onload = function() {
+		console.log ("load");
+		} //window on load stuff
+		
+		
 <!-- ================================================================================================================ -->
 		</script>
 	</head>
