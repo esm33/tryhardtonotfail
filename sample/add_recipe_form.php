@@ -102,7 +102,7 @@
 					
 				<div class="input-group">
 					<label for="drink_instructions">Instructions</label>
-					<input type="text" name="drink_instructions" name="d_instructions" required/><br>
+					<input type="text" id="drink_instructions" name="d_instructions" required/><br>
 				</div>
 
 				<button type="button" onclick="getRecipeInfo()" class="btn">Submit New Recipe</button>
