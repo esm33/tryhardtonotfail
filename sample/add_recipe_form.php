@@ -22,7 +22,43 @@
 		<link rel="stylesheet" href="./style.css">
 	</head>
 	<body>
-		<script>
+	
+	<?php include 'navigation.php'; ?>
+	
+	<div class="container">
+		<div class="glass-card">
+			<h1> Add Recipe</h1>
+			<form id="add_recipe_form">
+				<div class="input-group">
+					<label for="recipe_name">Recipe Name: </label>
+					<input type="text" id="recipe_name" name="rname" required />
+				</div>
+				
+				<div class="input-group">
+					<label for="drink_type">Drink Type</label>
+					<input type="text" id="drink_type" name="dtype" value="Alcoholic or Non-Alcoholic" required/><br>
+				</div>
+				
+				<div class="input-group">
+					<label for="drink_ingredient">Ingredient</label>
+					<input type="text" id="drink_ingredient" name="d_ingredient" required/><br>
+				</div>
+					
+				<div class="input-group">
+					<label for="drink_instructions">Instructions</label>
+					<input type="text" id="drink_instructions" name="d_instructions" required/><br>
+				</div>
+
+				<button type="button" onclick="getRecipeInfo()" class="btn">Submit New Recipe</button>
+				
+			</form>
+			
+			<div class="login-link"> <!--DON'T FORGET TO ADD CSS FOR THIS LINK, MUST ADD CSS LINES FOR THIS LINK -->
+			<a href="homecatalog.php">View Drink Catalog</a>
+			</div>
+		</div>
+<!-- ================================================================================================================ -->	
+	<script>
 
 		function HandleAddRecipeFormResponse(response)
 		{
@@ -76,43 +112,11 @@
 			SendAddRecipeFormRequest(recipe_name_input_value, drink_type_input_value, drink_ingredient_input_value, drink_instructions_input_value);
 			console.log("sendAddRecipeFormrequest done");
 		}
-
+<!-- ================================================================================================================ -->
 		</script>
 	
-	<?php include 'navigationbar.php'; ?>
 	
-	<div class="container">
-		<div class="glass-card">
-			<h1> Add Recipe</h1>
-			<form id="add_recipe_form">
-				<div class="input-group">
-					<label for="recipe_name">Recipe Name: </label>
-					<input type="text" id="recipe_name" name="rname" required />
-				</div>
-				
-				<div class="input-group">
-					<label for="drink_type">Drink Type</label>
-					<input type="text" id="drink_type" name="dtype" value="Alcoholic or Non-Alcoholic" required/><br>
-				</div>
-				
-				<div class="input-group">
-					<label for="drink_ingredient">Ingredient</label>
-					<input type="text" id="drink_ingredient" name="d_ingredient" required/><br>
-				</div>
-					
-				<div class="input-group">
-					<label for="drink_instructions">Instructions</label>
-					<input type="text" id="drink_instructions" name="d_instructions" required/><br>
-				</div>
-
-				<button type="button" onclick="getRecipeInfo()" class="btn">Submit New Recipe</button>
-				
-			</form>
-			
-			<div class="login-link"> <!--DON'T FORGET TO ADD CSS FOR THIS LINK, MUST ADD CSS LINES FOR THIS LINK -->
-			<a href="homecatalog.php">View Drink Catalog</a>
-			</div>
-		</div>
 	</body>
+	
 	
 </html>
