@@ -11,7 +11,7 @@
 		}	*/
 
 ?>
-<!-- <!DOCTYPE html> -->
+<!DOCTYPE html> 
 <html>
 	<head>
 		<title>Add Recipe</title>
@@ -49,6 +49,9 @@
 		}
 
 
+		
+		} //window on load stuff
+		
 		function getRecipeInfo()
 		{
 			
@@ -76,8 +79,6 @@
 
 			SendAddRecipeFormRequest(recipe_name_input_value, drink_type_input_value, drink_ingredient_input_value, drink_instructions_input_value);
 			console.log("sendAddRecipeFormrequest done");
-		}
-		
 		}
 <!-- ================================================================================================================ -->
 		</script>
