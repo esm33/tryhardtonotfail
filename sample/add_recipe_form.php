@@ -87,22 +87,22 @@
 			<form id="add_recipe_form">
 				<div class="input-group">
 					<label for="recipe_name">Recipe Name: </label>
-					<input type="text" id="recipe_name" name="rname" placeholder="" required />
+					<input type="text" id="recipe_name" name="rname" required />
 				</div>
 				
 				<div class="input-group">
 					<label for="drink_type">Drink Type</label>
-					<input type="text" id="drink_type" name="dtype" placeholder="" value="Alcoholic or Non-Alcoholic" required/><br>
+					<input type="text" id="drink_type" name="dtype" value="Alcoholic or Non-Alcoholic" required/><br>
 				</div>
 				
 				<div class="input-group">
 					<label for="drink_ingredient">Ingredient</label>
-					<input type="text" name="drink_ingredient" name="d_ingredient" placeholder="" required/><br>
+					<input type="text" id="drink_ingredient" name="d_ingredient" required/><br>
 				</div>
 					
 				<div class="input-group">
 					<label for="drink_instructions">Instructions</label>
-					<input type="text" name="drink_instructions" name="d_instructions" placeholder="How do you prepare your drink?" required/><br>
+					<input type="text" name="drink_instructions" name="d_instructions" required/><br>
 				</div>
 
 				<button type="button" onclick="getRecipeInfo()" class="btn">Submit New Recipe</button>
