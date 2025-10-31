@@ -48,9 +48,8 @@
 			console.log("type new_recipe sent HERE");
 		}
 
-function getRecipeInfo()
+	function getRecipeInfo()
 		{
-			
 			const recipe_name_text_input = document.getElementById("recipe_name");
 			const recipe_name_input_value = recipe_name_text_input.value;
 
@@ -65,7 +64,7 @@ function getRecipeInfo()
 			{
 				const drink_ingredient_input_value = drink_ingredient_text_input.value;
 			}
-			
+				
 
 			const drink_instructions_text_input = document.getElementById("drink_instructions");
 			const drink_instructions_input_value = drink_instructions_text_input.value;
@@ -79,11 +78,7 @@ function getRecipeInfo()
 			SendAddRecipeFormRequest(recipe_name_input_value, drink_type_input_value, drink_ingredient_input_value, drink_instructions_input_value);
 			console.log("sendAddRecipeFormrequest done");
 		}
-		
-		window.onload = function() {
-		console.log ("load");
-		} //window on load stuff
-		
+	
 		
 <!-- ================================================================================================================ -->
 		</script>
