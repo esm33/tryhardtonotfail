@@ -5,12 +5,12 @@ session_start();
 $failed_login = "failed to login";
 if(isset($_SESSION['successful_login']))
 {
-	header("Location: profile.php");
+    header("Location: profile.php");
 }
 /*
 else 
 {
-	echo "<script>console.log('Login request:', " . json_encode($failed_login) . ");</script>";
+    echo "<script>console.log('Login request:', " . json_encode($failed_login) . ");</script>";
 }
 */
 ?>
@@ -20,81 +20,81 @@ else
 
 function HandleLoginResponse(response)
 {
-	console.log("response:", response);
-	var text = JSON.parse(response);
-//	document.getElementById("textResponse").innerHTML = response+"<p>";	
-	document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
-	if(text === 1)
-	{
-		window.location.href = "profile.php";
-	}
+    console.log("response:", response);
+    var text = JSON.parse(response);
+//    document.getElementById("textResponse").innerHTML = response+"<p>";    
+    document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+    if(text === 1)
+    {
+        window.location.href = "profile.php";
+    }
 
 }
 
 function SendLoginRequest(username,password)
 {
-	var request = new XMLHttpRequest();
-	request.open("POST","communication.php",true);
-	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	request.onreadystatechange= function ()
-	{
-		if ((this.readyState == 4)&&(this.status == 200))
-		{
-			HandleLoginResponse(this.responseText);
-		}		
-	}
-	request.send("type=login&uname="+username+"&pword="+password);
+    var request = new XMLHttpRequest();
+    request.open("POST","communication.php",true);
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    request.onreadystatechange= function ()
+    {
+        if ((this.readyState == 4)&&(this.status == 200))
+        {
+            HandleLoginResponse(this.responseText);
+        }        
+    }
+    request.send("type=login&uname="+username+"&pword="+password);
 }
 
 function getLoginInfo()
 {
-	alert("login button clicked!");
-	const username_text_input = document.getElementById("username");
-	const username_input_value = username_text_input.value;
-	
-	const password_text_input = document.getElementById("password");
-	const password_input_value = password_text_input.value;
+    alert("login button clicked!");
+    const username_text_input = document.getElementById("username");
+    const username_input_value = username_text_input.value;
+    
+    const password_text_input = document.getElementById("password");
+    const password_input_value = password_text_input.value;
 
-	console.log("Username: ", username_input_value);
-	console.log("Password: ", password_input_value);
+    console.log("Username: ", username_input_value);
+    console.log("Password: ", password_input_value);
 
-	SendLoginRequest(username_input_value, password_input_value);
+    SendLoginRequest(username_input_value, password_input_value);
 }
 
 
 </script>
 <head>
-	<link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 <div class="container">
-	<div class="glass-card">
+    <div class="glass-card">
 
-	<h1>Login Form</h1>
-		<form id="loginForm">		
-			<div class="input-group">
-				<label for="username">Username: </label>
-				<input type="text" id="username" name="username" placeholder="Enter your username" required />
-			</div>
-						
-			<div class="input-group">
-				<label for="password">Password: </label>
-				<input type="password" id="password" name="password" placeholder="Enter your password" required />
-			</div>
+    <h1>Login Form</h1>
+        <form id="loginForm">        
+            <div class="input-group">
+                <label for="username">Username: </label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required />
+            </div>
+                        
+            <div class="input-group">
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            </div>
 
-			<br>
-			<button type="button" onclick="getLoginInfo()" class="btn">Login</button>
-			
-			<div class="register-link">
-				Don't have an account? <a href="./registration.html">Sign up</a>
-			</div>
+            <br>
+            <button type="button" onclick="getLoginInfo()" class="btn">Login</button>
+            
+            <div class="register-link">
+                Don't have an account? <a href="./registration.html">Sign up</a>
+            </div>
 
-			<div id="textResponse">
-				
-			</div>
-		</form>
-	</div>
+            <div id="textResponse">
+                
+            </div>
+        </form>
+    </div>
 </div>
 <!--
 <div id="textResponse">
@@ -106,3 +106,4 @@ awaiting response
 </script>
 </body>
 </html>
+

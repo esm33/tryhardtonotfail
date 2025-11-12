@@ -1,8 +1,8 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #nav_menu ul
@@ -38,200 +38,202 @@
 
 body {
 /*
-	font-family: helvetica;
-	align-items: center;
-	margin: 0;
-	background-color: #f4f4f4;
+    font-family: helvetica;
+    align-items: center;
+    margin: 0;
+    background-color: #f4f4f4;
 */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e);
-	overflow: hidden;
-	padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e);
+    overflow: hidden;
+    padding: 20px;
 }
 
 
 .container {
 
-	position: relative;
-	width: 100%;
-	max-width: 4290px;
-	z-index: 10;
+    position: relative;
+    width: 100%;
+    max-width: 4290px;
+    z-index: 10;
 }
 
 .glass-card {
 
-	background: rgba(255,255,255, 0.05);
-	backdrop-filter: blur(20px);
+    background: rgba(255,255,255, 0.05);
+    backdrop-filter: blur(20px);
 
-	border-radius: 20px;
-	border: 1px solid rgba(255,255,255,0.1);
-	padding: 40px 35px;
-	box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-	color: white;
-	position: relative;
-	overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 40px 35px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    color: white;
+    position: relative;
+    overflow: hidden;
 }
 
 
 
 
 .glass-card::before {
-	content: "";
-	position: absolute;
-	top: -50%;
-	left: -50%;
-	width: 200%;
-	height: 200%;
-	background: linear-gradient(
-	to bottom right,
-	rgba(255,255,255, 0.1) 0%,
-	transparent 50%
-	);
-	transform: rotate(30deg);
-	z-index: -1;
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+    to bottom right,
+    rgba(255,255,255, 0.1) 0%,
+    transparent 50%
+    );
+    transform: rotate(30deg);
+    z-index: -1;
 
 
 }
 
 h1{
-	text-align: center;
-	margin-bottom: 30px;
-	font-weight: 600;
-	font-size: 28px;
-	letter-spacing: 1px;
-	background: linear-gradient(to right, #8affd1, #b399ff);
-	
-	background-clip: text;
-	color: transparent;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 1px;
+    background: linear-gradient(to right, #8affd1, #b399ff);
+    
+    background-clip: text;
+    color: transparent;
 }
 
 .input-group{
-	margin-bottom: 25px;
-	position: relative;
+    margin-bottom: 25px;
+    position: relative;
 
 }
 
 
 .input-group label {
-	display: block;
-	margin-bottom: 8px;
-	font-size: 14px;
-	color: rgba(255,255,255,0.7);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
 }
 
 .input-group input {
-	width: 100%;
-	padding: 12px 15px 12px 45px;
-	background: rgba(255,255,255, 0.08);
-	border: 1px solid rgba(255,255,255,0.2);
-	border-radius: 10px;
-	color: white;
-	font-size: 16px;
-	transition: all 0.3s ease;
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    background: rgba(255,255,255, 0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
 
 }
 
 .input-group input:focus {
-	outline: none;
-	border-color: rgba(179,153,255, 0.6);
-	box-shadow: 0 0 10px rgba(179,153,255,0.2);
-	background: rgba(255,255,255,0.12);
+    outline: none;
+    border-color: rgba(179,153,255, 0.6);
+    box-shadow: 0 0 10px rgba(179,153,255,0.2);
+    background: rgba(255,255,255,0.12);
 
 
 }
 
 .input-group i {
-	position: absolute;
-	left: 15px;
-	top: 40px;
-	color: rgba(255,255,255,0.5)
-	transition: color 0.3s;
+    position: absolute;
+    left: 15px;
+    top: 40px;
+    color: rgba(255,255,255,0.5)
+    transition: color 0.3s;
 
 }
 
 .input-group input:focus + i {
-	color: #b399ff;
+    color: #b399ff;
 
 }
 
 .btn {
-	width:100%;
-	padding: 12px;
-	background: linear-gradient(to right, #8affd1, #b399ff);
-	border:none;
-	border-radius: 10px;
-	color; #1a1a2e;
-	font-size:16px;
-	font-weight: 600;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	box-shadow: 0 5px 15px rgba(138,255,209,0.3);
-	position: relative;
-	overflow: hidden;
+    width:100%;
+    padding: 12px;
+    background: linear-gradient(to right, #8affd1, #b399ff);
+    border:none;
+    border-radius: 10px;
+    color; #1a1a2e;
+    font-size:16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(138,255,209,0.3);
+    position: relative;
+    overflow: hidden;
 }
 
 .btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 8px 20px rgba(179,153,255,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(179,153,255,0.4);
 }
 
 .btn:active {
-	transform: translateY(0);
+    transform: translateY(0);
 
 }
 
 .btn::after {
 
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 5px;
-	height: 5px;
-	background: rgba(255,255,255,0.5);
-	opacity: 0;
-	border-radius: 100%
-	transform: scale(1,1) translate(-50%);
-	transform-origin: 50% 50%;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.5);
+    opacity: 0;
+    border-radius: 100%
+    transform: scale(1,1) translate(-50%);
+    transform-origin: 50% 50%;
 
 }
 
 .btn:focus:not(:active)::after {
 
-	animation: ripple ls ease-out;
+    animation: ripple ls ease-out;
 }
 
 
 #textResponse, p {
-	text-align:center;
-	margin-top: 25px;
-	font-size: 14px;
+    text-align:center;
+    margin-top: 25px;
+    font-size: 14px;
 }
 
 .register-link, .login-link {
 
-	text-align:center;
-	margin-top: 25px;
-	font-size: 14px;
+    text-align:center;
+    margin-top: 25px;
+    font-size: 14px;
 }
 
 
 .register-link a, .login-link a {
 
-	color: #b399ff;
-	text-decoration: none;
-	font-weight: 600;
-	transition: color 0.3s;
+    color: #b399ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
 
 }
 
 
 .register-link a:hover, .login-link a:hover {
-	color: #8affd1;
-	text-decoration: underline;
+    color: #8affd1;
+    text-decoration: underline;
 
 }
+
+
 

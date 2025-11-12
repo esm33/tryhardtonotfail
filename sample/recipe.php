@@ -1,27 +1,26 @@
 <?php
+
     if(!isset($_SESSION))
     {
         session_start();
     }
-    /*
-    if(!isset($_SESSION['successful_login']))
-        {
-            header("Location: login.php");
-            exit(0);
-        }    */
-        
-        
-//insert code here to connect to the database & grab the API 
 
+    if(!isset($_SESSION['successful_login']))
+    {
+        header("Location: login.php");
+        exit(0);
+    }
 
 ?>
-<!DOCTYPE html>
 <html>
-    <head>
-        <title>Add Rating</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
+<head>
+    <title><?php echo htmlspecialchars($_SESSION['recipe']); ?> Page</title>
+    
+    <link rel="stylesheet" href="./style.css">
+</head>
+<?php include 'navigationbar.php' ?>
+<body>
+<!-- =====================================================================================-->
         <script>
 
         function HandleAddRatingFormResponse(response)
@@ -65,31 +64,28 @@
         }
 
         </script>
-    </body>
+
+
+<!-- =====================================================================================-->
+<div class="container">
+    <div class="glass-card">
     
+        <h1><?php echo htmlspecialchars($_SESSION['recipe']); ?>  Page</h1> 
+        <p>Visual: <?php echo htmlspecialchars($_SESSION['image']); ?> </p>
+        <p>Drink Name: <?php echo htmlspecialchars($_SESSION['recipe']); ?> </p>
+        <p>Drink Type: <?php echo htmlspecialchars($_SESSION['type']); ?> </p>
+        <p>Ingredients: <?php echo htmlspecialchars($_SESSION['ingredients']); ?> </p>
+        <p>Quantity: <?php echo htmlspecialchars($_SESSION['quantity']); ?> </p>
+        <p>Instructions: <?php echo htmlspecialchars($_SESSION['instructions']); ?>
+        
+    </div>
     
-    <?php include 'navigationbar.php'; ?>
+    <div class="login-link"> <!--DON'T FORGET TO ADD CSS FOR THIS LINK, MUST ADD CSS LINES FOR THIS LINK -->
+        <a href="add_rating.php">Leave a rating here.</a>
+    </div>
     
-    <body>
-    <div class="container">
-        <div class="glass-card">
-            <h1> Add Rating</h1>
-            <form id="add_rating_form">
-                <div class="input-group">
-                    <label>User@<?php echo htmlspecialchars($_SESSION['username_profile']); ?></label>
-                    <label for="rating_system"> Rating (1 (lowest) - 5 (highest)): </label>
-                    <input type="number" id="rating_system" name="rvalue" min="1" max="5" required />
-                </div>
-                
-                <button type="button" onclick="getRatingInfo()" class="btn">Submit Rating</button>
-                
-            </form>
-            
-            <div class="login-link"> <!--DON'T FORGET TO ADD CSS FOR THIS LINK, MUST ADD CSS LINES FOR THIS LINK -->
-            <a href="homecatalog.php">View Drink Catalog</a>
-            </div>
-        </div>
-    </body>
-    
+</div>
+
+</body>
 </html>
 
