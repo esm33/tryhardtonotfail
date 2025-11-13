@@ -3,12 +3,13 @@
     {
         session_start();
     }
-    
+    /*
     if(!isset($_SESSION['successful_login']))
         {
             header("Location: login.php");
             exit(0);
-        }    
+        }  
+        */
 
 ?>
 <!DOCTYPE html> 
@@ -82,7 +83,7 @@
     </head>
     <body>
     
-    <?php include 'navigation.php'; ?>
+    <?php include 'navigationbar.php'; ?>
     
     <div class="container">
         <div class="glass-card">
