@@ -6,7 +6,7 @@ private $logindb;
 
 public function __construct()
 {
-	$this->logindb = new mysqli("127.0.0.1","thtnf","Tryhardtonotfail123!","IT490");
+	$this->logindb = new mysqli("localhost",'thtnf',"Tryhardtonotfail123!","IT490");
 
 	if ($this->logindb->connect_errno != 0)
 	{
@@ -66,18 +66,18 @@ public function registerUser($username, $password){
 	$statement->close();
 	echo "your registration is sucessful!";
 	}
-}
 
-public function writeRecipe ($cdrink_name, $cdrink_ingredients, $cdrink_instructions){
+public function writeRecipe ($cdrink_name, $cdrink_type, $cdrink_ingredients, $cdrink_instructions){
 
 	$customconn = $this->GetConnection();
-	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions) values (?, ?, ?)';
+	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions, $cdrink_type) values (?, ?, ?, ?)';
 	$statement = $customconn->prepare($query);
-	$statement->bind_param("sss", $cdrink_name, $cdrink_ingredients, $cdrink_instructions);
+	$statement->bind_param("sss", $cdrink_name, $cdrink_ingredients, $cdrink_instructions, $cdrink_type);
 	
 	$cdn = $this->logindb->real_escape_string($cdrink_name);
 	$cdi = $this->logindb->real_escape_string($cdrink_ingredients);
 	$cdin = $this->logindb->real_escape_string($cdrink_instructions);
+	$cdt = $this->logindb->real_escpae_string($cdrink_type);
 	
 	if($statement->execute())
 	{
@@ -91,7 +91,7 @@ public function writeRecipe ($cdrink_name, $cdrink_ingredients, $cdrink_instruct
 	$statement->close();
 	echo "The custom drink was logged.";
 	}
-}
+
 
 public function addRatings ($id, $ratingvalue) {
 
@@ -115,5 +115,7 @@ public function addRatings ($id, $ratingvalue) {
 	echo "The rating was logged.";
 	}
 }
+
+
 
 ?>
