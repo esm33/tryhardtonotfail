@@ -19,7 +19,7 @@ $dtype = $_POST['dtype'] ?? null;
 $d_ingredient = $_POST['d_ingredient'] ?? null;
 $d_instructions = $_POST['d_instructions'] ?? null;
 
-if (!$type || !$rname || !$dtype || $d_ingredients || $d_instructions) {
+if (!$type || !$rname || !$dtype || $d_ingredient || $d_instructions) {
     echo json_encode(["status" => "error", "message" => "Missing required fields"]);
     exit;
 }
@@ -65,8 +65,8 @@ try {
         "type"  => $type,
         "rname" => $rname,
         "dtype" => $dtype,
-        "d_ingredient" = $d_ingredient,
-        "d_instructions" = $d_instructions
+        "d_ingredient" => $d_ingredient,
+        "d_instructions" => $d_instructions
     ];
 
     // Publish the request

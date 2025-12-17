@@ -3,6 +3,7 @@
     {
         session_start();
     }
+    
     /*
     if(!isset($_SESSION['successful_login']))
         {
@@ -10,6 +11,7 @@
             exit(0);
         }  
         */
+        
 
 ?>
 <!DOCTYPE html> 
@@ -27,8 +29,8 @@
         {
             var text = JSON.parse(response);
         //    document.getElementById("textResponse").innerHTML = response+"<p>";    
-            document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
-            console.log("response:", text);
+            //document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+            //console.log("response:", text);
         }
 
         function SendAddRecipeFormRequest(recipe_name,drink_type,drink_ingredients, drink_instructions)
