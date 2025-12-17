@@ -57,7 +57,11 @@ while (true) {
 			$type = "registration";
 			echo ("this is case registration.");
 $success = $loginDB->registerUser($data['username'], $data['password']);
+
 		if ($success) { ["status"=>"success","message"=>"registration successful"]; }
+		
+		$hash = $row['password'];
+		return password_verify($password, $hash);
 		else {["status"=>"fail","message"=>"registration failed"];}
 		
         break;
