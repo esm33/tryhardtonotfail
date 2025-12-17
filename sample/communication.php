@@ -110,6 +110,13 @@ try {
         $response = ["status" => "error", "message" => "No response from DB server (timeout)"];
     }
 
+//if DB returns a successful login
+    if($response["status"]  === "success")
+    {
+    	$_SESSION['successful_login'] = true;
+    	$_SESSION['username_profile'] = $uname;
+    }
+//so communication.php is getting the login/regis data via post, sends to RabbitMQ, returns json
     echo json_encode($response);
 
     $conn->disconnect();
