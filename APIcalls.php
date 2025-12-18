@@ -24,7 +24,14 @@ def getAlphabetically{
 //should show a list of drinks starting with a
 	$results = shell_exec('GET  wwww.thecocktaildb.com/api/json/v1/1/search.php?f=a');
 	$arrayCode = json_decode($results);
-	var_dump($arrayCode);
+	$data = var_dump($arrayCode);
+	if (empty ($data) {
+	echo { ["status"=>"Failure","message"=>"api data not found"]; }
+	}
+	else echo { ["status"=>"success","message"=>"data called successfully"]; }
+}
+
+def recSystem{
 }
 
 
