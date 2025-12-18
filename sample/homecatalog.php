@@ -11,6 +11,9 @@
             exit(0);
         }
   
+  	require_once('APIcalls.php');
+  	$results = getRandom();
+  	
         
 //insert code here to connect to the database & grab the API 
 ?>
@@ -36,6 +39,19 @@
       </div>
     </div>
 <body>
+	<section>
+		<?php if (count($recipes) == 0): ?>
+		    <h1>There are no recipes.</h1>
+		<?php else: ?>
+		<div class="glass-card">
+			    <div>
+			    <?php foreach ($recipes as $recipe) : ?>
+				<p><?php echo $recipe->getName(); ?></p>
+			    <?php endforeach; ?>
+			    </div>
+		</div>
+		<?php endif; ?>
+    	</section>
 
 </body>
 </html>
