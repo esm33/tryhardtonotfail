@@ -28,7 +28,7 @@ $queue = new AMQPQueue($channel);
 $queue->setName('testQueue');
 $queue->setFlags(AMQP_DURABLE);
 $queue->declareQueue();
-$queue->bind('testExchange', 'db_route');
+$queue->bind('testExchange', 'testQueue');
 
 echo " [x] Waiting for messages on 'testQueue'...\n";
 
@@ -44,27 +44,50 @@ while (true) {
    
     $loginDB = new loginDB();
     $connDB = $loginDB->getConnection();
+    $hashed_password = password_hash($data['pword'], PASSWORD_DEFAULT);
+    $uname = $data['uname'];
+    $pword = $data['pword'];
     switch ($data['type']){
   	case "login":
 		$type = "login";
 		//get the username value and the password value
 		echo ("this is case login.");
 		$success = $loginDB->validateLogin($data['uname'], $data['pword']);
-		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
+		if ($success){["status"=>"success","message"=>"login.successful"];}
 		else {["status"=>"fail","message"=>"login failed"];}
-	break;
+		/*if(password_verify($data['pword'], $pword)){
+		$success = $loginDB->validateLogin($data['uname'], $hashed_password);		
+		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
+		else {["status"=>"fail","message"=>"login failed"];}}*/
+	break;    
 	case "registration":
 			$type = "registration";
 			echo ("this is case registration.");
-		echo $data["uname"];
-		echo $data["pword"];
-		$success = $loginDB->registerUser($data['uname'], $data['pword']);
-		echo $success;
-		if ($success) { ["status"=>"success","message"=>"registration successful"]; }
+			$success = $loginDB->registerUser($data['uname'], $hashed_password);
+
+		if ($success) { ["status"=>"success","message"=>"registration successful"]; 		}
+		
+
+		
 		else {["status"=>"fail","message"=>"registration failed"];}
 		
         break;
-    
+        case "new_rating":
+			$type = "new_rating";
+			echo ("this is case new rating.");
+$success = $loginDB->addRatings($data['uname'], $data['rvalue']);
+		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
+		else {["status"=>"fail","message"=>"rating interger failed"];}
+		
+        break;
+       case "new_Recipe":
+			$type = "new_recipe";
+			echo ("this is case new rating.");
+		$success = $loginDB->writeRecipe($data['username'], $data['rvalue']);
+		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
+		else {["status"=>"fail","message"=>"rating interger failed"];}
+		
+        break;
     
     }
     
@@ -82,6 +105,8 @@ while (true) {
 	}
     
     }
+    
+    
     	$queue->ack($message->getDeliveryTag());
 });
 
