@@ -12,12 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST)) {
     echo json_encode(["status" => "error", "message" => "No POST data received"]);
     exit;
 }
-
+$type  = $_POST['type']  ?? null;
 $userid  = $_POST['userid']  ?? null;
 $drinkid  = $_POST['drinkid']  ?? null;
 $review = $_POST['review'] ?? null;
 
-if (!$userid || !$review || !$drinkid) {
+if (!type || !$userid || !$review || !$drinkid) {
     echo json_encode(["status" => "error", "message" => "Missing required fields"]);
     exit;
 }
@@ -60,6 +60,7 @@ try {
     $corrId = uniqid();
 
     $message = [
+    	"type" => $type,
         "userid" => $userid,
         "review" => $review,
         "drinkid" => $drinkid
