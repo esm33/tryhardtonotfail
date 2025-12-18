@@ -67,7 +67,6 @@ $success = $loginDB->registerUser($username, $hashed_password);
 
 		
 		else {["status"=>"fail","message"=>"registration failed"];}
-		return password_verify($password, $hash);
 		
         break;
         case "new_rating":
