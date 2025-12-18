@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-//file for the API calls
-#!/usr/bin/php
-<?php
-require_once('path.inc');
-require_once('get_host_info.inc');
-require_once('communication.inc');
-
-def getRandom{
-=======
 
 <?php
 //USED TO BE BEFORE <?php
@@ -47,9 +37,8 @@ function getAPI($link)
 
 function getRandom() {
 /*
->>>>>>> 8b76e5fc24d065f2e9358f90ad33065f541a193e
 //should show a random drink 
-	$results = shell_exec('GET  www.thecocktaildb.com/api/json/v1/1/random.php');
+	$results = shell_exec('GET www.thecocktaildb.com/api/json/v1/1/random.php');
 	$arrayCode = json_decode($results);
 	var_dump($arrayCode);
 	*/
@@ -57,11 +46,7 @@ function getRandom() {
 	return getAPI($link);
 }
 
-<<<<<<< HEAD
-def getPages(drink){
-=======
 function getPages($drinkname){
->>>>>>> 8b76e5fc24d065f2e9358f90ad33065f541a193e
 //searching for a specific drink by name
 /*
 	$results = shell_exec('GET www.thecocktaildb.com/api/json/v1/1/search.php?s={drink}');
@@ -78,20 +63,29 @@ function getPages($drinkname){
 	
 }
 
-def getAlphabetically{
-//should show a list of drinks starting with a
-	$results = shell_exec('GET  wwww.thecocktaildb.com/api/json/v1/1/search.php?f=a');
-	$arrayCode = json_decode($results);
-	$data = var_dump($arrayCode);
-	if (empty ($data) {
-	echo { ["status"=>"Failure","message"=>"api data not found"]; }
-	}
-	else echo { ["status"=>"success","message"=>"data called successfully"]; }
+function getBook(){
+	link = 'www.thecocktaildb.com/api/json/v1/1/search.php?f=a';
+	return getAPI($link);
+	//return the list of recicpes in alphabetical order
 }
 
-def recSystem{
+function getIngredient($iname){
+	link = ' www.thecocktaildb.com/api/json/v1/1/filter.php?i='.urlencode($iname);
+	return getAPI($link);
+	//return the list of recipes with that ingredient 
 }
 
+function getAlcoholic() {
+
+	$link = 'www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic';
+	return getAPI($link);
+}
+
+function getNonAlcoholic() {
+
+	$link = 'www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic';
+	return getAPI($link);
+}
 
 
 
