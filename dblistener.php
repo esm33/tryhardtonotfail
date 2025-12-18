@@ -49,6 +49,7 @@ while (true) {
 		$type = "login";
 		//get the username value and the password value
 		echo ("this is case login.");
+		password_verify($password, $hash);
 		$success = $loginDB->validateLogin($data['username'], $data['password']);
 		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
 		else {["status"=>"fail","message"=>"login failed"];}
@@ -56,13 +57,15 @@ while (true) {
 	case "registration":
 			$type = "registration";
 			echo ("this is case registration.");
+			$hash = $row['password'];
 $success = $loginDB->registerUser($data['username'], $data['password']);
 
-		if ($success) { ["status"=>"success","message"=>"registration successful"]; }
+		if ($success) { ["status"=>"success","message"=>"registration successful"]; 		}
 		
-		$hash = $row['password'];
-		return password_verify($password, $hash);
+
+		
 		else {["status"=>"fail","message"=>"registration failed"];}
+		return password_verify($password, $hash);
 		
         break;
         case "new_rating":
