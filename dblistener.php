@@ -46,12 +46,13 @@ while (true) {
     $connDB = $loginDB->getConnection();
         $hashed_password = password_hash($data['pword'], PASSWORD_DEFAULT);
         $uname = $data['uname'];
+        $pword = $data['pword'];
     switch ($data['type']){
   	case "login":
 		$type = "login";
 		//get the username value and the password value
 		echo ("this is case login.");
-		if(password_verify($data['pword'], $hashed_password)){
+		if(password_verify($data['pword'], $pword)){
 		$success = $loginDB->validateLogin($data['uname'], $hashed_password);		
 		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
 		else {["status"=>"fail","message"=>"login failed"];}}
