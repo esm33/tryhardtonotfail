@@ -12,7 +12,9 @@
         }
   
   	require_once('APIcalls.php');
-  	$results = getRandom();
+  	$drinks = getRandom(); //this will set the received array to a variable array now called drinks
+  	
+  	
   	
         
 //insert code here to connect to the database & grab the API 
