@@ -44,12 +44,14 @@ while (true) {
    
     $loginDB = new loginDB();
     $connDB = $loginDB->getConnection();
+    
     switch ($data['type']){
+    $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
   	case "login":
 		$type = "login";
 		//get the username value and the password value
 		echo ("this is case login.");
-		password_verify($password, $hash);
+		password_verify($data['password'], $hashed_password);
 		$success = $loginDB->validateLogin($data['username'], $data['password']);
 		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
 		else {["status"=>"fail","message"=>"login failed"];}
@@ -57,8 +59,8 @@ while (true) {
 	case "registration":
 			$type = "registration";
 			echo ("this is case registration.");
-			$hash = $row['password'];
-$success = $loginDB->registerUser($data['username'], $data['password']);
+			
+$success = $loginDB->registerUser($data['username'], $hashed_password);
 
 		if ($success) { ["status"=>"success","message"=>"registration successful"]; 		}
 		
