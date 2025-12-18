@@ -2,19 +2,6 @@
 
 session_start();
 
-/*
-//pings this if can't connect to the db
-if($conn -> errno != 0)
-{echo "failed to connect to database: ". $conn->error . PHP_EOL;
-exit(0);
-//display this if it can connect to the db
-echo "successfully connected to the database";
-
- */
-{
-
-
-
 // communication.php
 // Handles sending registration/login messages to RabbitMQ and waits for DB VM response
 
@@ -27,14 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST)) {
 }
 
 $type  = $_POST['type']  ?? null;
-$uname = $_POST['uname'] ?? null;
-$pword = $_POST['pword'] ?? null;
 $rname = $_POST['rname'] ?? null;
 $dtype = $_POST['dtype'] ?? null;
 $d_ingredient = $_POST['d_ingredient'] ?? null;
 $d_instructions = $_POST['d_instructions'] ?? null;
 
-if (!$type || !$uname || !$pword) {
+if (!$type || !$rname || !$dtype || $d_ingredient || $d_instructions) {
     echo json_encode(["status" => "error", "message" => "Missing required fields"]);
     exit;
 }
@@ -52,7 +37,7 @@ $RABBITMQ = [
 ];
 
 try {
-    // Connect to RabbitMQ
+    // Connect to RabbitMQS
     $conn = new AMQPConnection([
         'host'     => $RABBITMQ['host'],
         'port'     => $RABBITMQ['port'],
@@ -65,8 +50,8 @@ try {
     $channel  = new AMQPChannel($conn);
     $exchange = new AMQPExchange($channel);
     $exchange->setName($RABBITMQ['exchange']);
-    $exchange->setFlags(AMQP_DURABLE);
     $exchange->setType('direct');
+    $exchange->setFlags(AMQP_DURABLE);
     $exchange->declareExchange();
 
     // Create or declare a response queue (unique per client)
@@ -78,8 +63,10 @@ try {
 
     $message = [
         "type"  => $type,
-        "uname" => $uname,
-        "pword" => $pword
+        "rname" => $rname,
+        "dtype" => $dtype,
+        "d_ingredient" => $d_ingredient,
+        "d_instructions" => $d_instructions
     ];
 
     // Publish the request
@@ -92,8 +79,6 @@ try {
             'correlation_id'  => $corrId
         ]
     );
-	
-	error_log("submission");
 
     // Wait for response from DB VM
     $response = null;
@@ -117,10 +102,10 @@ try {
     }
 
 //if DB returns a successful login
-    if($response == 1 || $response == "success")
+    if($response == 1)
     {
-    	$_SESSION['successful_login'] = true;
-    	$_SESSION['username_profile'] = $uname;
+        $_SESSION['successful_login'] = true;
+        $_SESSION['username_profile'] = $uname;
     }
 //so communication.php is getting the login/regis data via post, sends to RabbitMQ, returns json
     echo json_encode($response);
@@ -131,5 +116,9 @@ try {
     echo json_encode(["status" => "error", "message" => $e->getMessage()]);
     exit;
 }
-}
+
 ?>
+
+
+
+
