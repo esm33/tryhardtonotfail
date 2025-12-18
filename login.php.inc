@@ -32,7 +32,7 @@ public function validateLogin($username,$password)
 	{
 		echo "checking password for $username".PHP_EOL;
         $hashed_password = password_hash($pw, PASSWORD_DEFAULT);
-		if ($row["password"] == $hashed_password))
+		if (password_verify($pw, $row['password'])
 		{
 			echo "passwords match for $username".PHP_EOL;
 			return 1;// password match
