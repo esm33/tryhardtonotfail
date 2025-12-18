@@ -14,9 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST)) {
 }
 
 $userid  = $_POST['userid']  ?? null;
+$drinkid  = $_POST['drinkid']  ?? null;
 $review = $_POST['review'] ?? null;
 
-if (!$userid || !$review) {
+if (!$userid || !$review || !$drinkid) {
     echo json_encode(["status" => "error", "message" => "Missing required fields"]);
     exit;
 }
@@ -61,6 +62,7 @@ try {
     $message = [
         "userid" => $userid,
         "review" => $review,
+        "drinkid" => $drinkid
         ];
 
     // Publish the request
