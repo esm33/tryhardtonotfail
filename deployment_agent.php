@@ -65,7 +65,7 @@ class DeploymentAgent {
     }
     
     private function verifyHash($filepath, $expectedHash) {
-        $this->log("Verifying integrity...");
+        $this->log("Verifying hash");
         
         $actualHash = hash_file('sha256', $filepath);
         
@@ -115,15 +115,6 @@ class DeploymentAgent {
         $this->log("extracted successfully");
     }
     
-    private function runPostDeploy() {
-        $script = $this->config['paths']['app'] . '/scripts/post_deploy.sh';
-        
-        if (file_exists($script)) {
-            $this->log("Running post-deploy script...");
-            exec("bash " . escapeshellarg($script));
-            $this->log("✓ Post-deploy complete");
-        }
-    }
     
     private function restartService() {
         $service = $this->config['service_name'];
@@ -133,7 +124,7 @@ class DeploymentAgent {
         exec("sudo systemctl restart $service 2>&1", $output, $returnCode);
         
         if ($returnCode === 0) {
-            $this->log("restart succsess");
+            $this->log("restart success");
         } else {
             $this->log("restart failed");
         }
@@ -145,26 +136,27 @@ class DeploymentAgent {
         try {
             $data = json_decode($msg->body, true);
             $this->log("NEW DEPLOYMENT");
-            $this->log("Deployment ID: " . $data['deployment_id']);
-            $this->log("Bundle: {$data['bundle_name']} v{$data['version']}");
-            $this->log("Environment: " . $data['environment']);
+            $this->log("Deployment ID= " . $data['deployment_id']);
+            $this->log("Bundle ID =" .$data['bundle_Id']);
+            $this->log("Bundle= {$data['bundle_name']} v{$data['version']}");
+            $this->log("Environment= " . $data['environment']);
         
             if ($data['environment'] !== $this->config['environment']) {
-             
+                $this->log("Wrong environment - ignoring");
+                $msg->ack();
                 return;
             }
+            
             $backupDir = $this->backup();
             $localBundle = $this->downloadBundle($data['file_path']);
             $this->verifyHash($localBundle, $data['file_hash']);
             
             $this->extractBundle($localBundle);
             
-            $this->runPostDeploy();
          
             $this->restartService();
 
             $this->log("DEPLOYMENT SUCCESSFUL");
-
             
             $msg->ack();
             
@@ -173,12 +165,11 @@ class DeploymentAgent {
             $this->log("DEPLOYMENT FAILED");
             $this->log("Error: " . $e->getMessage());
             
-        
             if ($backupDir && is_dir($backupDir)) {
                 $appDir = $this->config['paths']['app'];
                 $this->log("Restoring backup");
                 exec("rm -rf " . escapeshellarg($appDir) . " && mv " . escapeshellarg($backupDir) . " " . escapeshellarg($appDir));
-                $this->log("Backup restor succses");
+                $this->log("Backup restore success");
             }
             
             $msg->nack(false);
@@ -190,7 +181,7 @@ class DeploymentAgent {
         
         $rmq = $this->config['rabbitmq'];
         
-        $this->log("Connecting to RabbitMQ: {$rmq['host']}:{$rmq['port']}");
+        $this->log("RabbitMQ info {$rmq['host']}:{$rmq['port']}");
         
         $connection = new AMQPStreamConnection(
             $rmq['host'],
@@ -202,8 +193,8 @@ class DeploymentAgent {
         $channel = $connection->channel();
         $channel->queue_declare($queue, false, true, false, false);
         $channel->basic_qos(null, 1, null);
-        $this->log("AGENT READY");
-        $this->log("Listening on: $queue");
+        $this->log("READY");
+        $this->log("Listening on $queue");
 
         $callback = function($msg) use ($channel) {
             $this->handleDeployment($channel, $msg);
