@@ -1,5 +1,6 @@
 <?php
 
+
     if(!isset($_SESSION))
     {
         session_start();
@@ -10,7 +11,7 @@
         header("Location: login.php");
         exit(0);
     }
-
+    
 ?>
 <html>
 <head>

@@ -91,6 +91,7 @@ try {
             'correlation_id'  => $corrId
         ]
     );
+    console.log("Submission");
 
     // Wait for response from DB VM
     $response = null;

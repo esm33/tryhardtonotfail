@@ -3,9 +3,11 @@
 session_start();
 
 $failed_login = "failed to login";
-if(isset($_SESSION['successful_login']))
+//if(isset($_SESSION['successful_login']))
+if(isset($_SESSION['successful_login']) && $_SESSION['successful_login'] == true)
 {
     header("Location: profile.php");
+    exit;
 }
 /*
 else 
