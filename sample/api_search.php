@@ -31,6 +31,7 @@ try {
     $exchange = new AMQPExchange($channel);
     $exchange->setName($RABBITMQ['exchange']);
     $exchange->setType('direct');
+    $exchange->setFlags(AMQP_DURABLE);
     $exchange->declareExchange(); 
     $callbackQueue = new AMQPQueue($channel);
     $callbackQueue->setName($RABBITMQ['response_queue']);

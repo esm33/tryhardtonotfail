@@ -26,11 +26,11 @@ function getAPI($link)
 
 	// Use the data
 	if ($data !== null) {
-	    echo "Data fetched successfully:\n";
+	    //echo "Data fetched successfully:\n";
 	    //print_r($data);
 	    return $data;
 	} else {
-	    echo "Failed to decode JSON or retrieve data.\n";
+	    //echo "Failed to decode JSON or retrieve data.\n";
 	    return;
 	}
 }
