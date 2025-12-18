@@ -21,7 +21,7 @@
 <script>
 function HandleSearchResponse(response)
 {
-    console.log("response:", response);
+    console.log("response console log:", response);
     var text = JSON.parse(response);
 //    document.getElementById("textResponse").innerHTML = response+"<p>";    
   //  document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
@@ -32,15 +32,26 @@ function HandleSearchResponse(response)
     else if(text.drinks !=null)
 	{
     	
-	document.getElementById("textResponse").innerHTML = response+"<p>";   
+	//document.getElementById("textResponse").innerHTML = response+"<p>";   
 	//go through drinks array and print out drink
 	//to see all variables: https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
 	for(var i=0; i < text.drinks.length; i++)
 	{
 	//in the overall drinks array, get the strDrink value of the drink[i]
-		document.getElementById("textResponse").innerHTML += "<p>" + text.drinks[i].strDrink+"</p>";
+		//document.getElementById("textResponse").innerHTML += "<div>" + text.drinks[i].strDrink + text.drinks[i].idDrink + text.drinks[i].strAlcoholic + text.drinks[i].strInstructions+"</p><br>";
 		//idDrink, strDrink, strAlcoholic, strInstructions
 		//parse out bad language
+		
+		
+		document.getElementById("textResponse").innerHTML += "<div class='glass-card'><h2>" + text.drinks[i].strDrink +"</h2><p><strong>ID: "+ text.drinks[i].idDrink +"</p><p>strong>Non/Alcoholic: </strong>"+ text.drinks[i].strAlcoholic + "</p><p><strong> Instructions: </strong>" + text.drinks[i].strInstructions+"</div><br>";
+		
+		//<div class="glass-card">
+		//<h2>text.drinks[i].strDrink</h2>
+		//<p><strong>ID: </strong>text.drinks[i].idDrink </p>
+		//<p><strong>Non/Alcoholic: </strong>text.drinks[i].strAlcoholic </p>
+		//<p><strong>Instructions: </strong>text.drinks[i].strInstructions</p>
+		//</div>
+		
 	}
 	
     }
@@ -97,15 +108,24 @@ function getSearchInfo()
         <br>
         <button type="button" onclick="getSearchInfo()" class="btn"> Enter </button>
         
-        <div id="textResponse">
         
-        </div>
     </form>
     
-      </div>
+   
+
+     </div>
+     <br>
+     <br>
+     <div class="glass-card">
+	    <div id="textResponse">
+		
+	    </div>
+     </div>
+
     </div>
 <body>
-	
+
+
 
 </body>
 </html>
