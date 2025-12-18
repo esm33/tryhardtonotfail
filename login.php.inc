@@ -31,6 +31,7 @@ public function validateLogin($username,$password)
 	while ($row = $response->fetch_assoc())
 	{
 		echo "checking password for $username".PHP_EOL;
+        $hashed_password = password_hash($pw, PASSWORD_DEFAULT);
 		if ($row["password"] == $pw && password_verify($pw, $hashed_password))
 		{
 			echo "passwords match for $username".PHP_EOL;
