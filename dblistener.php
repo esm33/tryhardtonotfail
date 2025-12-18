@@ -44,9 +44,8 @@ while (true) {
    
     $loginDB = new loginDB();
     $connDB = $loginDB->getConnection();
-    
+        $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
     switch ($data['type']){
-    $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
   	case "login":
 		$type = "login";
 		//get the username value and the password value
