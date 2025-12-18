@@ -45,6 +45,7 @@ while (true) {
     $loginDB = new loginDB();
     $connDB = $loginDB->getConnection();
         $hashed_password = password_hash($data['password'], PASSWORD_DEFAULT);
+        $username = $data['username'];
     switch ($data['type']){
   	case "login":
 		$type = "login";
@@ -59,7 +60,7 @@ while (true) {
 			$type = "registration";
 			echo ("this is case registration.");
 			
-$success = $loginDB->registerUser($data['username'], $hashed_password);
+$success = $loginDB->registerUser($username, $hashed_password);
 
 		if ($success) { ["status"=>"success","message"=>"registration successful"]; 		}
 		
