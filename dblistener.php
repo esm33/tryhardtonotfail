@@ -51,9 +51,8 @@ while (true) {
 		$type = "login";
 		//get the username value and the password value
 		echo ("this is case login.");
-		password_verify($data['password'], $hashed_password);
-		$success = $loginDB->validateLogin($data['uname'], $data['pword']);
-		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
+		password_verify($data['password'], $hashed_password)
+		$success = $loginDB->validateLogin($data['uname'], $hashed_password);}		if ($success) { ["status"=>"success","message"=>"login.successful"]; }
 		else {["status"=>"fail","message"=>"login failed"];}
 	break;    
 	case "registration":
