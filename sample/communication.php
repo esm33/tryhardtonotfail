@@ -91,7 +91,8 @@ try {
             'correlation_id'  => $corrId
         ]
     );
-    console.log("Submission");
+	
+	error_log("submission");
 
     // Wait for response from DB VM
     $response = null;
@@ -115,7 +116,7 @@ try {
     }
 
 //if DB returns a successful login
-    if($response == 1)
+    if($response == 1 || $response == "success")
     {
     	$_SESSION['successful_login'] = true;
     	$_SESSION['username_profile'] = $uname;
