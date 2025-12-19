@@ -68,17 +68,18 @@ public function registerUser($username, $password){
 	echo "your registration is sucessful!";
 	}
 
-public function writeRecipe ($cdrink_name, $cdrink_type, $cdrink_ingredients, $cdrink_instructions){
-
+public function writeRecipe ($cdrink_name, $cdrink_ingredients, $cdrink_instructions, $cdrink_type){
+	echo "starting writeRecipe";
 	$customconn = $this->GetConnection();
-	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions, $cdrink_type) values (?, ?, ?, ?)';
+	echo "hey im here to say you've gotten through!";
+	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions, cdrink_type) values (?, ?, ?, ?)';
 	$statement = $customconn->prepare($query);
-	$statement->bind_param("sss", $cdrink_name, $cdrink_ingredients, $cdrink_instructions, $cdrink_type);
+	$statement->bind_param("ssss", $cdrink_name, $cdrink_ingredients, $cdrink_instructions, $cdrink_type);
 	
 	$cdn = $this->logindb->real_escape_string($cdrink_name);
 	$cdi = $this->logindb->real_escape_string($cdrink_ingredients);
 	$cdin = $this->logindb->real_escape_string($cdrink_instructions);
-	$cdt = $this->logindb->real_escpae_string($cdrink_type);
+	$cdt = $this->logindb->real_escape_string($cdrink_type);
 	
 	if($statement->execute())
 	{
@@ -86,7 +87,7 @@ public function writeRecipe ($cdrink_name, $cdrink_type, $cdrink_ingredients, $c
 		return 1;
 	}
 	else {
-		"Something went wrong...Please try again!";
+		 echo "Something went wrong...Please try again!";
 		return 0;
 		}
 	$statement->close();
@@ -94,14 +95,16 @@ public function writeRecipe ($cdrink_name, $cdrink_type, $cdrink_ingredients, $c
 	}
 
 
-public function addRatings ($id, $ratingvalue) {
+public function addRatings ($review, $drinkid, $username) {
 
 	$ratingconn = $this->GetConnection();
-	$query = 'Insert into ratings (id, ratingvalue) values (?, ?)';
+
+	$query = 'Insert into ratings (username, drinkid, review) values (?, ?, ?)';
 	$statement = $ratingconn->prepare($query);
-	$statement->bind_param("is", $id, $ratingvalue);
-	
-	$rv = $this->logindb->real_escape_string($ratingvalue);
+	$statement->bind_param("sss", $username, $drinkid, $review);
+	$id = $this->logindb->real_escape_string($username);
+	$did = $this->logindb->real_escape_string($drinkid);	
+	$rv = $this->logindb->real_escape_string($review);
 	
 	if($statement->execute())
 	{

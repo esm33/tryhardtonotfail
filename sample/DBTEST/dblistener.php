@@ -40,7 +40,7 @@ while (true) {
         $data = json_decode($body, true);
        $request = $_POST;
     if(isset($data["type"])){  
-    echo "type received";
+    echo "type received ='" .$data['type']. "'\n";
    
     $loginDB = new loginDB();
     $connDB = $loginDB->getConnection();
@@ -75,17 +75,18 @@ while (true) {
         case "new_rating":
 			$type = "new_rating";
 			echo ("this is case new rating.");
-$success = $loginDB->addRatings($data['uname'], $data['rvalue']);
+$success = $loginDB->addRatings($data['review'], $data['drinkid'], $data['username']);
 		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
 		else {["status"=>"fail","message"=>"rating interger failed"];}
 		
         break;
-       case "new_Recipe":
+       case "new_recipe":
+       			echo $type;
 			$type = "new_recipe";
-			echo ("this is case new rating.");
-		$success = $loginDB->writeRecipe($data['username'], $data['rvalue']);
-		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
-		else {["status"=>"fail","message"=>"rating interger failed"];}
+			echo ("this is case for adding a new recipe.");
+			$success = $loginDB->writeRecipe($data['rname'], $data['d_ingredient'],$data['d_instructions'], $data['dtype']);
+			if ($success) { ["status"=>"success","message"=>"recipe  added successfully"]; }
+			else {["status"=>"fail","message"=>"recipe failed"];}
 		
         break;
     
