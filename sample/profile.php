@@ -32,12 +32,12 @@ function HandleRecipeBookResponse(response)
 	for(var i=0; i < text.recipes.length; i++)
 	{
 	
-		document.getElementById("textResponse").innerHTML += "<div class='glass-card'><h2>" + text.recipes[i].rname +"</h2><p><strong>Type: </strong>"+ text.recipes[i].dtype +"</p><p><strong>Ingredients: </strong>"+ text.recipes[i].d_ingredient + "</p><p><strong> Instructions: </strong>" + text.recipes[i].d_instructions+"</div><br>";
+		document.getElementById("textResponse").innerHTML += "<div class='glass-card'><h2>" + text.recipes[i].rname +"</h2><p><strong>Type: </strong>"+ text.recipes[i].dtype +"</p><p><strong>Ingredients: </strong>"+ text.recipes[i].d_ingredients + "</p><p><strong> Instructions: </strong>" + text.recipes[i].d_instructions+"</div><br>";
 		
 		//<div class="glass-card">
 		//<h2>text.recipes[i].rname</h2>
 		//<p><strong>Type: </strong>text.recipes[i].dtype </p>
-		//<p><strong>Ingredients: </strong>text.recipes[i].d_ingredient </p>
+		//<p><strong>Ingredients: </strong>text.recipes[i].d_ingredients </p>
 		//<p><strong>Instructions: </strong>text.recipes[i].d_instructions</p>
 		//</div>
 		
