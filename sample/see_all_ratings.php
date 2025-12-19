@@ -58,7 +58,7 @@ function HandleSeeAllRatingsResponse(response)
 function SendSeeAllRatingsRequest()
 {
     var request = new XMLHttpRequest();
-    request.open("POST",".see_all_ratings_communication.php",true);
+    request.open("POST","./see_all_ratings_communication.php",true);
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     request.onreadystatechange= function ()
     {
