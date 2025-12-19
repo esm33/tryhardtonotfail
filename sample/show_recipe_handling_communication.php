@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $RABBITMQ = [
     "host" => "100.86.240.90",
     "port" => 5672,
@@ -9,6 +11,8 @@ $RABBITMQ = [
     "queue" => "testQueue",
     "routing_key" => "testQueue"
 ];
+
+try {
     $conn = new AMQPConnection([
         'host'     => $RABBITMQ['host'],
         'port'     => $RABBITMQ['port'],
@@ -16,45 +20,65 @@ $RABBITMQ = [
         'password' => $RABBITMQ['password'],
         'vhost'    => $RABBITMQ['vhost']
     ]);
+    
     $conn->connect();
+    $channel = new AMQPChannel($conn);
 
-    $channel  = new AMQPChannel($conn);
     $exchange = new AMQPExchange($channel);
     $exchange->setName($RABBITMQ['exchange']);
-    $exchange->setType('direct');
+    $exchange->setType(AMQP_EX_TYPE_DIRECT);
     $exchange->setFlags(AMQP_DURABLE);
     $exchange->declareExchange();
 
     $callbackQueue = new AMQPQueue($channel);
-    $callbackQueue->setName($RABBITMQ['queue'] . '_response');
+    $callbackQueue->setFlags(AMQP_EXCLUSIVE);
     $callbackQueue->declareQueue();
+    $callbackQueueName = $callbackQueue->getName();
 
-    $corrId = uniqid();
-$requestData = json_encode(['type' => 'get_recipes']);  //all we need is get recipes for db listner to return based on that type
-$exchange->publish($requestData, 'testQueue');
-echo "Sent request for recipes\n";
-
-$responseQueue = new AMQPQueue($channel);
-$responseQueue->setName('responseQueue');
-$responseQueue->setFlags(AMQP_DURABLE);
-$responseQueue->declareQueue();
-$responseQueue->bind('responseExchange', 'responseQueue');
-
-echo "Waiting for response...\n";
-
-$responseQueue->consume(function (AMQPEnvelope $message, AMQPQueue $queue) {
-    $body = $message->getBody();
-    echo "Received response: $body\n";
+    $corrId = uniqid('rpc_');
+    $requestData = json_encode(['type' => 'get_recipes']);
     
-    $data = json_decode($body, true);
-    
-    if ($data['status'] === 'success') {
-        return ($data['recipes']);
+    $exchange->publish(
+        $requestData, 
+        $RABBITMQ['routing_key'], 
+        AMQP_NOPARAM, 
+        [
+            'reply_to'       => $callbackQueueName,
+            'correlation_id' => $corrId,
+            'content_type'   => 'application/json'
+        ]
+    );
+
+    $response = null;
+    $startTime = time();
+    $timeout = 5; 
+
+    while (!$response && (time() - $startTime) < $timeout) {
+        $message = $callbackQueue->get(AMQP_AUTOACK);
+        if ($message && $message->getCorrelationId() == $corrId) {
+            $response = $message->getBody();
+        }
     }
-    
-    $queue->ack($message->getDeliveryTag());
-    return false; 
-}, AMQP_NOPARAM, 5000);
 
-$connection->disconnect();
+    $conn->disconnect();
+
+    header('Content-Type: application/json');
+    if ($response) {
+        echo $response;
+    } else {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Request timed out or no recipes found"
+        ]);
+    }
+
+} catch (Exception $e) {
+    header('Content-Type: application/json');
+    echo json_encode([
+        "status" => "error",
+        "message" => "Connection error: " . $e->getMessage()
+    ]);
+}
 ?>
+
+

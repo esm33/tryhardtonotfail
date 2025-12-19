@@ -58,7 +58,7 @@ function SendRecipeBookRequest()
     {
         if ((this.readyState == 4)&&(this.status == 200))
         {
-            HandleSearchResponse(this.responseText);
+            HandleRecipeBookResponse(this.responseText);
             console.log("ready state working");
         }        
     }
