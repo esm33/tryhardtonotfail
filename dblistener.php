@@ -89,6 +89,15 @@ $success = $loginDB->addRatings($data['review'], $data['drinkid'], $data['userna
 			else {["status"=>"fail","message"=>"recipe failed"];}
 		
         break;
+        
+case "get_recipes":
+			echo "MATCHED case get_recipes\n";
+			$recipes = $loginDB->getCustomRecipes();
+			$success = [
+				'status' => 'success',
+				'recipes' => $recipes
+			];
+		break;
     
     }
     
