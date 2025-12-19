@@ -73,17 +73,18 @@ $success = $loginDB->registerUser($data['uname'], $hashed_password);
         case "new_rating":
 			$type = "new_rating";
 			echo ("this is case new rating.");
-$success = $loginDB->addRatings($data['username'], $data['rvalue']);
+$success = $loginDB->addRatings($data['userid'], $data['review'], $data['drinkid']);
 		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
 		else {["status"=>"fail","message"=>"rating interger failed"];}
 		
         break;
+     
        case "new_Recipe":
 			$type = "new_recipe";
-			echo ("this is case new rating.");
-$success = $loginDB->writeRecipe($data['username'], $data['rvalue']);
-		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
-		else {["status"=>"fail","message"=>"rating interger failed"];}
+			echo ("this is case for adding a new recipe.");
+$success = $loginDB->writeRecipe($data['rname'], $data['dtype'],$data['d_ingredient'], $data['d_instructions']);
+		if ($success) { ["status"=>"success","message"=>"recipe  added successfully"]; }
+		else {["status"=>"fail","message"=>"recipe failed"];}
 		
         break;
     
