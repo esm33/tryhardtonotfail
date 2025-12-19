@@ -94,10 +94,10 @@ public function writeRecipe ($cdrink_name, $cdrink_type, $cdrink_ingredients, $c
 	}
 
 
-public function addRatings ($username, $drinkid, $review) {
+public function addRatings ($review, $drinkid, $username) {
 
 	$ratingconn = $this->GetConnection();
-	$query = 'Insert into ratings (username, drinkid, review) values (?, ?, ?)';
+	$query = 'Insert into ratings (review, drinkid, username) values (?, ?, ?)';
 	$statement = $ratingconn->prepare($query);
 	$statement->bind_param("sss", $username, $drinkid, $review);
 	

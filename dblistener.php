@@ -73,7 +73,7 @@ $success = $loginDB->registerUser($data['uname'], $hashed_password);
         case "new_rating":
 			$type = "new_rating";
 			echo ("this is case new rating.");
-$success = $loginDB->addRatings($data['username'], $data['review'], $data['drinkid']);
+$success = $loginDB->addRatings($data['review'], $data['drinkid'], $data['username']);
 		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
 		else {["status"=>"fail","message"=>"rating interger failed"];}
 		
