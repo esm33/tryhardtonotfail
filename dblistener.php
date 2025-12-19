@@ -78,7 +78,7 @@ $success = $loginDB->addRatings($data['review'], $data['drinkid'], $data['userna
 		else {["status"=>"fail","message"=>"rating interger failed"];}
 		
         break;
-     
+
        case "new_Recipe":
 			$type = "new_recipe";
 			echo ("this is case for adding a new recipe.");

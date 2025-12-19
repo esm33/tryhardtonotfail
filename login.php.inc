@@ -68,17 +68,17 @@ public function registerUser($username, $password){
 	echo "your registration is sucessful!";
 	}
 
-public function writeRecipe ($cdrink_name, $cdrink_type, $cdrink_ingredients, $cdrink_instructions){
+public function writeRecipe ($rname, $d_ingredients, $d_instructions, $dtype){
 
 	$customconn = $this->GetConnection();
-	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions, $cdrink_type) values (?, ?, ?, ?)';
+	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions, cdrink_type) values (?, ?, ?, ?)';
 	$statement = $customconn->prepare($query);
-	$statement->bind_param("sss", $cdrink_name, $cdrink_ingredients, $cdrink_instructions, $cdrink_type);
+	$statement->bind_param("ssss", $rname, $d_ingredients, $d_instructions, $dtype);
 	
-	$cdn = $this->logindb->real_escape_string($cdrink_name);
-	$cdi = $this->logindb->real_escape_string($cdrink_ingredients);
-	$cdin = $this->logindb->real_escape_string($cdrink_instructions);
-	$cdt = $this->logindb->real_escpae_string($cdrink_type);
+	$cdn = $this->logindb->real_escape_string($rname);
+	$cdi = $this->logindb->real_escape_string($d_ingredients);
+	$cdin = $this->logindb->real_escape_string($d_instructions);
+	$cdt = $this->logindb->real_escpae_string($dtype);
 	
 	if($statement->execute())
 	{
