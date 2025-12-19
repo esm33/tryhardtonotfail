@@ -94,7 +94,7 @@ window.addEventListener('load', function(){
     <br>
     <br>
     <div class="glass-card scrollable-container">
-    	<h1>My Recipe Book</h1>
+    	<h1>Community Recipe Book</h1>
     	<div id="textResponse"> 
     		**** No Recipes Here....Yet ****
     	</div>
