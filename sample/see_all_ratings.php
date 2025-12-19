@@ -77,6 +77,7 @@ function getSeeAllRatingsInfo()
   //  const search_input_value = search_text_input.value;
     
   //  console.log("Search: ", search_input_value);
+  //returns recipes array
     SendSeeAllRatingsRequest();
 }
 
