@@ -88,6 +88,7 @@ function SendSearchRequest(search_query)
         if ((this.readyState == 4)&&(this.status == 200))
         {
             HandleSearchResponse(this.responseText);
+            console.log("handlesearchresponse ready state done");
         }        
     }
     request.send("search="+encodeURIComponent(search_query));
