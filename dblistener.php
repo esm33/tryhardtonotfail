@@ -75,11 +75,9 @@ $success = $loginDB->registerUser($data['uname'], $hashed_password);
 			echo ("this is case new rating.");
 $success = $loginDB->addRatings($data['review'], $data['drinkid'], $data['username']);
 		if ($success) { ["status"=>"success","message"=>"rating integer added successfully"]; }
-		else {["status"=>"fail","message"=>"rating interger failed"];}
-		
+		else {["status"=>"fail","message"=>"rating interger failed"];}	
         break;
-
-       case "new_Recipe":
+       case "new_recipe":
 			$type = "new_recipe";
 			echo ("this is case for adding a new recipe.");
 $success = $loginDB->writeRecipe($data['rname'], $data['dtype'],$data['d_ingredient'], $data['d_instructions']);
