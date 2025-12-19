@@ -52,25 +52,27 @@ function HandleRecipeBookResponse(response)
 function SendRecipeBookRequest()
 {
 	 var request = new XMLHttpRequest();
-    request.open("POST","./myrecipebook_communication.php",true);
+    request.open("POST","./show_recipe_handling_communication.php",true);
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     request.onreadystatechange= function ()
     {
         if ((this.readyState == 4)&&(this.status == 200))
         {
             HandleSearchResponse(this.responseText);
+            console.log("ready state working");
         }        
     }
-    request.send("type=myrecipebook");
+    request.send("type=get_recipes");
 }
 function getRecipeBookInfo()
 {
-	console.log("start getting recipe book");
 	SendRecipeBookRequest();
+	console.log("calling SendRecipeBookRequest");
 }
 
 window.addEventListener('load', function(){
-	SendRecipeBookRequest();
+	getRecipeBookInfo();
+	console.log("getting recipe book");
 });
 </script>
 
