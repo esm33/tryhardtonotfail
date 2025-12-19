@@ -56,7 +56,7 @@
                     console.log("SendAddRatingFormrequest function ready state done.");
                 }        
             }
-            request.send("type=new_rating&username="+username+"&drinkid="+drinkid+"&review="+rating_value);
+            request.send("type=new_rating&username="+encodeURIComponent(username)+"&drinkid="+encodeURIComponent(drinkid)+"&review="+encodeURIComponent(rating_value));
             console.log("type new_rating sent HERE");
         }
 
