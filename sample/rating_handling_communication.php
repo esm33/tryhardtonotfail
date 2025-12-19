@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST)) {
     exit;
 }
 $type  = $_POST['type']  ?? null;
-$userid  = $_POST['userid']  ?? null;
+$username  = $_POST['username']  ?? null;
 $drinkid  = $_POST['drinkid']  ?? null;
 $review = $_POST['review'] ?? null;
 
-if (!$type || !$userid || !$review || !$drinkid) {
+if (!$type || !$username || !$review || !$drinkid) {
     echo json_encode(["status" => "error", "message" => "Missing required fields"]);
     exit;
 }
@@ -61,7 +61,7 @@ try {
 
     $message = [
     	"type" => $type,
-        "userid" => $userid,
+        "username" => $username,
         "review" => $review,
         "drinkid" => $drinkid
         ];

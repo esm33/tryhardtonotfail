@@ -41,7 +41,7 @@
 	    
         }
 
-        function SendAddRatingFormRequest(rating_value, userid, drinkid)
+        function SendAddRatingFormRequest(rating_value, username, drinkid)
         {
             var request = new XMLHttpRequest();
             request.open("POST","rating_handling_communication.php",true);
@@ -55,7 +55,7 @@
                     console.log("SendAddRatingFormrequest function ready state done.");
                 }        
             }
-            request.send("type=new_rating&userid="+userid+"&drinkid="+drinkid+"&review"+review);
+            request.send("type=new_rating&username="+username+"&drinkid="+drinkid+"&review="+rating_value);
             console.log("type new_rating sent HERE");
         }
 
@@ -66,19 +66,19 @@
             const rating_system_text_input = document.getElementById("rating_system");
             const rating_system_input_value = rating_system_text_input.value;
             
-            const userid_text_input = document.getElementById("userid");
-            const userid_system_input_value = userid_system_text_input.value;
+            const username_text_input = document.getElementById("username");
+            const username_input_value = username_text_input.value;
             
-            const drinkid_system_text_input = document.getElementById("drinkid");
-            const drinkid_system_input_value = drinkid_system_text_input.value;
+            const drinkid_text_input = document.getElementById("drinkid");
+            const drinkid_input_value = drinkid_text_input.value;
             
 	
             
             console.log("Rating Value: ", rating_system_input_value);
-            console.log("UserID Value: ", userid_system_input_value);
-            console.log("DrinkID Value: ", drinkid_system_input_value);
+            console.log("Username Value: ", username_input_value);
+            console.log("DrinkID Value: ", drinkid_input_value);
             
-            SendAddRatingFormRequest(rating_system_input_value, userid_system_input_value, drinkid_system_input_value);
+            SendAddRatingFormRequest(rating_system_input_value, username_input_value, drinkid_input_value);
             console.log("sendAddRatingFormrequest done");
         }
 
@@ -95,19 +95,29 @@
             <form id="add_rating_form">
                 <div class="input-group">
                     <label>User@<?php echo htmlspecialchars($_SESSION['username_profile']); ?></label>
-                    <label id="userid">UserID: <?php echo htmlspecialchars($_SESSION['userid']); ?></label>
-                    <label id="drinkid">DrinkID: <?php echo htmlspecialchars($_GET['drinkid']); ?></label>
+                    <input type="hidden" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['username_profile']); ?>" />
+                    
+                    <label for="drinkid">DrinkID: </label>
+                    <input type="text" id="drinkid" name="drinkid" rows="4" cols="50" required />
+        
+        
                     <label for="rating_system"> Review: </label>
                     <input type="text" id="rating_system" name="review" rows="4" cols="50" required />
+               
                 </div>
+                
+                    
                 
                 <button type="button" onclick="getRatingInfo()" class="btn">Submit Rating</button>
                 
             </form>
             
-            <div class="login-link"> <!--DON'T FORGET TO ADD CSS FOR THIS LINK, MUST ADD CSS LINES FOR THIS LINK -->
-            <a href="homecatalog.php">View Drink Catalog</a>
-            </div>
+            	<div id="textResponse">
+            	
+            	</div>
+		    <div class="login-link"> <!--DON'T FORGET TO ADD CSS FOR THIS LINK, MUST ADD CSS LINES FOR THIS LINK -->
+		    <a href="homecatalog.php">View Drink Catalog</a>
+		    </div>
         </div>
     </body>
     
