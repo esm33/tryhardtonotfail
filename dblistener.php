@@ -28,7 +28,7 @@ $queue = new AMQPQueue($channel);
 $queue->setName('testQueue');
 $queue->setFlags(AMQP_DURABLE);
 $queue->declareQueue();
-$queue->bind('testExchange', 'db_route');
+$queue->bind('testExchange', 'testQueue');
 
 echo " [x] Waiting for messages on 'testQueue'...\n";
 
