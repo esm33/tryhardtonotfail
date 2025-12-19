@@ -34,9 +34,10 @@
 	    {
 		document.getElementById("textResponse").innerHTML = "error: " + text.message+"</p>";
 	    }
-	    if(text.status === "success") 
+	    if(text.status === "success" || text === 1 || text === "1") 
 	    {
-		document.getElementById("textResponse").innerHTML = "status: " + text.status+"</p>";
+		//document.getElementById("textResponse").innerHTML = "status: " + text.status+"</p>";
+		document.getElementById("textResponse").innerHTML = "****Rating is successfully added****";
 	    }
 	    
         }

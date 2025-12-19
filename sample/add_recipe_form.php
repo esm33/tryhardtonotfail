@@ -20,8 +20,7 @@
         <title>Add Recipe</title>
         <link rel="stylesheet" href="./style.css">
         
-        
-<!-- ================================================================================================================ -->    
+ 
 
     <script type="text/javascript">
 
@@ -29,8 +28,18 @@
         {
             var text = JSON.parse(response);
         //    document.getElementById("textResponse").innerHTML = response+"<p>";    
-            //document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
-            //console.log("response:", text);
+            document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
+            console.log("response:", text);
+            if(text.status === "error") 
+	    {
+		document.getElementById("textResponse").innerHTML = "error: " + text.message+"</p>";
+	    }
+	    if(text.status === "success" || text === 1 || text === "1") 
+	    {
+		//document.getElementById("textResponse").innerHTML = "status: " + text.status+"</p>";
+		document.getElementById("textResponse").innerHTML = "****Recipe is successfully added****";
+	    }
+	    
         }
 
         function SendAddRecipeFormRequest(recipe_name,drink_type,drink_ingredients, drink_instructions)
@@ -48,7 +57,9 @@
                 }        
             }
             //FOCUS HERE
-            request.send("type=new_recipe&rname="+recipe_name+"&dtype="+drink_type+"&d_ingredient="+drink_ingredients+"&d_instructions="+drink_instructions);
+           // error fixed: needed encoding https://www.w3schools.com/tags//ref_urlencode.asp 
+           
+           request.send("type=new_recipe&rname="+encodeURIComponent(recipe_name)+"&dtype="+encodeURIComponent(drink_type)+"&d_ingredient="+encodeURIComponent(drink_ingredients)+"&d_instructions="+encodeURIComponent(drink_instructions));
             console.log("type new_recipe sent HERE");
         }
 
@@ -98,7 +109,7 @@
                 
                 <div class="input-group">
                     <label for="drink_type">Drink Type</label>
-                    <input type="text" id="drink_type" name="dtype" value="Alcoholic or Non-Alcoholic" required/><br>
+                    <input type="text" id="drink_type" name="dtype" placeholder="Alcoholic or Non-Alcoholic" required/><br>
                 </div>
                 
                 <div class="input-group">
@@ -116,6 +127,9 @@
                 
             </form>
             
+            <div id="textResponse">
+            
+            </div>
                 <div class="login-link"> <!--DON'T FORGET TO ADD CSS FOR THIS LINK, MUST ADD CSS LINES FOR THIS LINK -->
                 <a href="homecatalog.php">View Drink Catalog</a>
                 </div>
