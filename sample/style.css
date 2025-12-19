@@ -48,8 +48,9 @@ body {
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e);
-    overflow: hidden;
+    overflow: auto; /*hidden*/
     padding: 20px;
+    padding-top: 100px;
 }
 
 
@@ -211,6 +212,7 @@ h1{
     font-size: 14px;
 }
 
+
 .register-link, .login-link {
 
     text-align:center;
@@ -234,6 +236,14 @@ h1{
     text-decoration: underline;
 
 }
+
+
+.scrollable-container {
+  max-height: 400px;
+  overflow-y: auto;
+
+}
+
 
 
 

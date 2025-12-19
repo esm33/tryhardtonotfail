@@ -32,7 +32,7 @@ function HandleSearchResponse(response)
     else if(text.drinks !=null)
 	{
     	
-	//document.getElementById("textResponse").innerHTML = response+"<p>";   
+	document.getElementById("textResponse").innerHTML = ""; //to clear error messages or previous responses when you do another search  
 	//go through drinks array and print out drink
 	//to see all variables: https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
 	for(var i=0; i < text.drinks.length; i++)
@@ -41,9 +41,25 @@ function HandleSearchResponse(response)
 		//document.getElementById("textResponse").innerHTML += "<div>" + text.drinks[i].strDrink + text.drinks[i].idDrink + text.drinks[i].strAlcoholic + text.drinks[i].strInstructions+"</p><br>";
 		//idDrink, strDrink, strAlcoholic, strInstructions
 		//parse out bad language
+		var ingredient_list = "";	
+		for(var j=1; j < 16; j++)
+		{
+			
+			var ingredientNumber = "strIngredient" + j;
+			var ingredient = text.drinks[i][ingredientNumber];
+			
+			if(ingredient != null)
+			{
+				ingredient_list += ingredient;
+			}
+			if(ingredient_list != "" && text.drinks[i][ingredientNumber] != null)
+			{
+				ingredient_list += ", ";
+			}
+			
+		}
 		
-		
-		document.getElementById("textResponse").innerHTML += "<div class='glass-card'><h2>" + text.drinks[i].strDrink +"</h2><p><strong>ID: "+ text.drinks[i].idDrink +"</p><p>strong>Non/Alcoholic: </strong>"+ text.drinks[i].strAlcoholic + "</p><p><strong> Instructions: </strong>" + text.drinks[i].strInstructions+"</div><br>";
+		document.getElementById("textResponse").innerHTML += "<div class='glass-card'><h2>" + text.drinks[i].strDrink +"</h2><p><strong>ID: </strong>"+ text.drinks[i].idDrink +"</p><p><strong>Non/Alcoholic: </strong>"+ text.drinks[i].strAlcoholic + "</p><p><strong>Ingredients: </strong>" + ingredient_list +"</p><p><strong> Instructions: </strong>" + text.drinks[i].strInstructions+"</div><br>";
 		
 		//<div class="glass-card">
 		//<h2>text.drinks[i].strDrink</h2>
@@ -116,7 +132,7 @@ function getSearchInfo()
      </div>
      <br>
      <br>
-     <div class="glass-card">
+     <div class="glass-card scrollable-container">
 	    <div id="textResponse">
 		
 	    </div>
