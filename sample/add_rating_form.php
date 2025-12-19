@@ -30,12 +30,21 @@
         //    document.getElementById("textResponse").innerHTML = response+"<p>";    
             document.getElementById("textResponse").innerHTML = "response: "+text+"<p>";
             console.log("response:", text);
+            if(text.status === "error") 
+	    {
+		document.getElementById("textResponse").innerHTML = "error: " + text.message+"</p>";
+	    }
+	    if(text.status === "success") 
+	    {
+		document.getElementById("textResponse").innerHTML = "status: " + text.status+"</p>";
+	    }
+	    
         }
 
-        function SendAddRatingFormRequest(rating_value)
+        function SendAddRatingFormRequest(rating_value, userid, drinkid)
         {
             var request = new XMLHttpRequest();
-            request.open("POST","communication.php",true);
+            request.open("POST","rating_handling_communication.php",true);
             request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             request.onreadystatechange= function ()
             {
@@ -46,7 +55,7 @@
                     console.log("SendAddRatingFormrequest function ready state done.");
                 }        
             }
-            request.send("type=new_rating&rvalue="+rating_value);
+            request.send("type=new_rating&userid="+userid+"&drinkid="+drinkid+"&review"+review);
             console.log("type new_rating sent HERE");
         }
 
@@ -56,11 +65,20 @@
             
             const rating_system_text_input = document.getElementById("rating_system");
             const rating_system_input_value = rating_system_text_input.value;
-
+            
+            const userid_text_input = document.getElementById("userid");
+            const userid_system_input_value = userid_system_text_input.value;
+            
+            const drinkid_system_text_input = document.getElementById("drinkid");
+            const drinkid_system_input_value = drinkid_system_text_input.value;
+            
+	
             
             console.log("Rating Value: ", rating_system_input_value);
+            console.log("UserID Value: ", userid_system_input_value);
+            console.log("DrinkID Value: ", drinkid_system_input_value);
             
-            SendAddRatingFormRequest(rating_system_input_value);
+            SendAddRatingFormRequest(rating_system_input_value, userid_system_input_value, drinkid_system_input_value);
             console.log("sendAddRatingFormrequest done");
         }
 
@@ -77,8 +95,10 @@
             <form id="add_rating_form">
                 <div class="input-group">
                     <label>User@<?php echo htmlspecialchars($_SESSION['username_profile']); ?></label>
-                    <label for="rating_system"> Rating (1 (lowest) - 5 (highest)): </label>
-                    <input type="number" id="rating_system" name="rvalue" min="1" max="5" required />
+                    <label id="userid">UserID: <?php echo htmlspecialchars($_SESSION['userid']); ?></label>
+                    <label id="drinkid">DrinkID: <?php echo htmlspecialchars($_GET['drinkid']); ?></label>
+                    <label for="rating_system"> Review: </label>
+                    <input type="text" id="rating_system" name="review" rows="4" cols="50" required />
                 </div>
                 
                 <button type="button" onclick="getRatingInfo()" class="btn">Submit Rating</button>
