@@ -6,7 +6,7 @@ private $logindb;
 
 public function __construct()
 {
-	$this->logindb = new mysqli("127.0.0.1","root","12345","login");
+	$this->logindb = new mysqli("localhost",'thtnf',"Tryhardtonotfail123!","IT490");
 
 	if ($this->logindb->connect_errno != 0)
 	{
@@ -14,6 +14,11 @@ public function __construct()
 		exit(1);
 	}
 	echo "correctly connected to database".PHP_EOL;
+}
+
+public function getConnection()
+{
+	return $this->logindb;
 }
 
 public function validateLogin($username,$password)
@@ -26,7 +31,8 @@ public function validateLogin($username,$password)
 	while ($row = $response->fetch_assoc())
 	{
 		echo "checking password for $username".PHP_EOL;
-		if ($row["password"] == $pw)
+		//$hashed_password = password_hash($pw, PASSWORD_DEFAULT);
+		if (password_verify($pw, $row["password"]))
 		{
 			echo "passwords match for $username".PHP_EOL;
 			return 1;// password match
@@ -35,5 +41,110 @@ public function validateLogin($username,$password)
 	}
 	return 0;//no users matched username
 }
+public function registerUser($username, $password){
+	//echo $un;
+	//echo $pw;
+	//echo $logindb;
+	$conn = $this->GetConnection();
+	$query = 'Insert into users (username, password) values (?, ?)';
+	$statement = $conn->prepare($query);
+	$statement->bind_param("ss", $username, $password);
+	
+	$un = $this->logindb->real_escape_string($username);
+	$pw = $this->logindb->real_escape_string($password);
+	//$statement = $this->logindb->prepare($query);
+	//$response = logindb->query($statement);
+	
+	if($statement->execute())
+	{
+		echo "Your registration was successful!";
+		return 1;
+	}
+	else {
+		"Something went wrong...Please try again!";
+		return 0;
+		}
+	$statement->close();
+	echo "your registration is sucessful!";
+	}
+
+public function writeRecipe ($cdrink_name, $cdrink_ingredients, $cdrink_instructions, $cdrink_type){
+	echo "starting writeRecipe";
+	$customconn = $this->GetConnection();
+	echo "hey im here to say you've gotten through!";
+	$query = 'Insert into customdrink (cdrink_name, cdrink_ingredients, cdrink_instructions, cdrink_type) values (?, ?, ?, ?)';
+	$statement = $customconn->prepare($query);
+	$statement->bind_param("ssss", $cdrink_name, $cdrink_ingredients, $cdrink_instructions, $cdrink_type);
+	
+	$cdn = $this->logindb->real_escape_string($cdrink_name);
+	$cdi = $this->logindb->real_escape_string($cdrink_ingredients);
+	$cdin = $this->logindb->real_escape_string($cdrink_instructions);
+	$cdt = $this->logindb->real_escape_string($cdrink_type);
+	
+	if($statement->execute())
+	{
+		echo "You've added a custom drink!";
+		return 1;
+	}
+	else {
+		 echo "Something went wrong...Please try again!";
+		return 0;
+		}
+	$statement->close();
+	echo "The custom drink was logged.";
+	}
+
+
+public function addRatings ($review, $drinkid, $username) {
+
+	$ratingconn = $this->GetConnection();
+
+	$query = 'Insert into ratings (username, drinkid, review) values (?, ?, ?)';
+	$statement = $ratingconn->prepare($query);
+	$statement->bind_param("sss", $username, $drinkid, $review);
+	$id = $this->logindb->real_escape_string($username);
+	$did = $this->logindb->real_escape_string($drinkid);	
+	$rv = $this->logindb->real_escape_string($review);
+	
+	if($statement->execute())
+	{
+		echo "Thanks for your review!";
+		return 1;
+	}
+	else {
+		"Something went wrong...Please try again!";
+		return 0;
+		}
+	$statement->close();
+	echo "The rating was logged.";
+	}
+	
+	
+public function getCustomRecipes() {
+	$query = "SELECT * FROM customdrink ORDER BY id DESC";
+	$result = $this->logindb->query($query);
+	
+	$recipes = [];
+	if ($result) {
+		while ($row = $result->fetch_assoc()) {
+			$recipes[] = [
+				'id' => $row['id'],
+				'rname' => $row['cdrink_name'],
+				'dtype' => $row['cdrink_type'],
+				'd_ingredients' => $row['cdrink_ingredients'],
+				'd_instructions' => $row['cdrink_instructions']
+			];
+		}
+		echo "Found " . count($recipes) . " recipes\n";
+	} else {
+		echo "Query failed: " . $this->logindb->error . "\n";
+	}
+	
+	return $recipes;
 }
+
+}
+
+
+
 ?>
