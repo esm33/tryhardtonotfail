@@ -94,14 +94,14 @@ public function writeRecipe ($cdrink_name, $cdrink_type, $cdrink_ingredients, $c
 	}
 
 
-public function addRatings ($id, $drinkid, $review) {
+public function addRatings ($username, $drinkid, $review) {
 
 	$ratingconn = $this->GetConnection();
-	$query = 'Insert into ratings (id, drinkid, review) values (?, ?, ?)';
+	$query = 'Insert into ratings (username, drinkid, review) values (?, ?, ?)';
 	$statement = $ratingconn->prepare($query);
-	$statement->bind_param("iss", $id, $drinkid, $review);
+	$statement->bind_param("sss", $username, $drinkid, $review);
 	
-	$id = $this->logindb->real_escape_string($id);
+	$id = $this->logindb->real_escape_string($username);
 	$did = $this->logindb->real_escape_string($drinkid);	
 	$rv = $this->logindb->real_escape_string($review);	
 	
