@@ -90,7 +90,7 @@ function SendSearchRequest(search_query)
             HandleSearchResponse(this.responseText);
         }        
     }
-    request.send("search="+search_query);
+    request.send("search="+encodeURIComponent(search_query));
 }
 
 function getSearchInfo()
